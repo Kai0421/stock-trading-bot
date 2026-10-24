@@ -1,0 +1,3992 @@
+{
+ "intraday_blocks": [
+  {
+   "alerts": [
+    [
+     "WARN",
+     "No intraday trades: account too small",
+     "Day trading needs at least $25,000 in the account (pattern-day-trader rule); it has $20,000."
+    ]
+   ],
+   "broker": [
+    [
+     "account"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [
+     {
+      "key": "once:pdt_block:2026-10-05",
+      "value": "1"
+     }
+    ],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [],
+   "broker": [
+    [
+     "account"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "CRITICAL",
+     "Safety stop: big loss today",
+     "daily loss -16.67%, drawdown -16.67% from peak. No new trades today."
+    ]
+   ],
+   "broker": [
+    [
+     "account"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [
+     {
+      "cash": 120000.0,
+      "day": "2026-10-02",
+      "equity": 120000.0
+     }
+    ],
+    "flags": [
+     {
+      "name": "halt_today",
+      "reason": "daily loss -16.67%, drawdown -16.67% from peak",
+      "set_at": "2026-10-05T10:12:00-04:00",
+      "value": 1
+     }
+    ],
+    "kv": [
+     {
+      "key": "halt_day",
+      "value": "2026-10-05"
+     },
+     {
+      "key": "once:intraday_halt:2026-10-05",
+      "value": "1"
+     }
+    ],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "CRITICAL",
+     "Buying paused: couldn't confirm the account is cash-only",
+     "The bot couldn't confirm that borrowing money (margin) and short selling are switched off on the account, so it won't buy anything until it can."
+    ]
+   ],
+   "broker": [
+    [
+     "account"
+    ],
+    [
+     "verify",
+     true
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [
+     {
+      "name": "paused",
+      "reason": "drawdown",
+      "set_at": "2026-10-05T08:00:00-04:00",
+      "value": 1
+     }
+    ],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  }
+ ],
+ "intraday_exit_and_stop_raise": [
+  {
+   "alerts": [
+    [
+     "WARN",
+     "No price for SPY",
+     "Couldn't get a current price, so the bot didn't buy it."
+    ],
+    [
+     "INFO",
+     "Buy order placed: AAPL",
+     "Buying up to 196 shares of AAPL at $101.60 or less (up to $19,913.60). Stop-loss $100.26. Estimated win chance 80%."
+    ],
+    [
+     "INFO",
+     ":moneybag: Bought AAPL",
+     "\u2022 Bought 196 shares of AAPL at $101.50 each\n\u2022 Total: $19,894.00\n\u2022 Stop-loss is at $100.26"
+    ]
+   ],
+   "broker": [
+    [
+     "account"
+    ],
+    [
+     "verify",
+     true
+    ],
+    [
+     "account"
+    ],
+    [
+     "entry",
+     "AAPL",
+     196,
+     101.6,
+     100.26,
+     "2026-10-05-AAPL-ientry"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [
+     {
+      "key": "ientry:2026-10-05:AAPL",
+      "value": "2026-10-05 10:05:00"
+     }
+    ],
+    "orders": [
+     {
+      "alpaca_id": "o2",
+      "client_order_id": "2026-10-05-AAPL-ientry",
+      "created_at": "2026-10-05T10:12:00-04:00",
+      "limit_price": 101.6,
+      "qty": 196.0,
+      "side": "buy",
+      "status": "new",
+      "stop_price": 100.26,
+      "symbol": "AAPL",
+      "type": "limit",
+      "updated_at": "2026-10-05T10:12:00-04:00"
+     }
+    ],
+    "plans": [],
+    "positions": [
+     {
+      "days_held": 0,
+      "entry_date": "2026-10-05",
+      "entry_price": 101.5,
+      "initial_stop": 100.26,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 196,
+      "shares_initial": 196,
+      "signature": "unknown",
+      "stop": 100.26,
+      "stop_order_id": "o1",
+      "symbol": "AAPL",
+      "win_prob": null
+     }
+    ],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"orb_breakout\", \"mode\": \"intraday\", \"bar\": \"2026-10-05 10:05:00\", \"close\": 101.4}",
+      "id": 1,
+      "lower_bound": 0.7288586692020038,
+      "reason": "entered",
+      "sample_size": 0,
+      "signature": "orb_breakout|mid|up",
+      "symbol": "AAPL",
+      "taken": 1,
+      "win_prob": 0.8
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "WARN",
+     "No price for SPY",
+     "Couldn't get a current price, so the bot didn't buy it."
+    ],
+    [
+     "INFO",
+     "Buy order placed: AAPL",
+     "Buying up to 196 shares of AAPL at $101.60 or less (up to $19,913.60). Stop-loss $100.26. Estimated win chance 80%."
+    ],
+    [
+     "INFO",
+     ":moneybag: Bought AAPL",
+     "\u2022 Bought 196 shares of AAPL at $101.50 each\n\u2022 Total: $19,894.00\n\u2022 Stop-loss is at $100.26"
+    ],
+    [
+     "INFO",
+     ":arrow_up: AAPL: stop-loss moved up",
+     "The stop-loss for your 196 shares moved up from $100.26 to $109.34. If the price falls to $109.34, the bot sells automatically. A stop-loss only ever moves up, never down."
+    ],
+    [
+     "INFO",
+     ":arrow_up: AAPL: stop-loss moved up",
+     "The stop-loss for your 196 shares moved up from $109.34 to $109.38. If the price falls to $109.38, the bot sells automatically. A stop-loss only ever moves up, never down."
+    ]
+   ],
+   "broker": [
+    [
+     "account"
+    ],
+    [
+     "verify",
+     true
+    ],
+    [
+     "account"
+    ],
+    [
+     "entry",
+     "AAPL",
+     196,
+     101.6,
+     100.26,
+     "2026-10-05-AAPL-ientry"
+    ],
+    [
+     "replace",
+     "o1",
+     109.34,
+     null
+    ],
+    [
+     "replace",
+     "o1",
+     109.38,
+     null
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [
+     {
+      "key": "ientry:2026-10-05:AAPL",
+      "value": "2026-10-05 10:05:00"
+     }
+    ],
+    "orders": [
+     {
+      "alpaca_id": "o2",
+      "client_order_id": "2026-10-05-AAPL-ientry",
+      "created_at": "2026-10-05T10:12:00-04:00",
+      "limit_price": 101.6,
+      "qty": 196.0,
+      "side": "buy",
+      "status": "new",
+      "stop_price": 100.26,
+      "symbol": "AAPL",
+      "type": "limit",
+      "updated_at": "2026-10-05T10:12:00-04:00"
+     }
+    ],
+    "plans": [],
+    "positions": [
+     {
+      "days_held": 0,
+      "entry_date": "2026-10-05",
+      "entry_price": 101.5,
+      "initial_stop": 100.26,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 196,
+      "shares_initial": 196,
+      "signature": "unknown",
+      "stop": 109.38,
+      "stop_order_id": "o1",
+      "symbol": "AAPL",
+      "win_prob": null
+     }
+    ],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"orb_breakout\", \"mode\": \"intraday\", \"bar\": \"2026-10-05 10:05:00\", \"close\": 101.4}",
+      "id": 1,
+      "lower_bound": 0.7288586692020038,
+      "reason": "entered",
+      "sample_size": 0,
+      "signature": "orb_breakout|mid|up",
+      "symbol": "AAPL",
+      "taken": 1,
+      "win_prob": 0.8
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "INFO",
+     "Buy order placed: AAPL",
+     "Buying up to 201 shares of AAPL at $99.50 or less (up to $19,999.50). Stop-loss $98.50. Estimated win chance 80%."
+    ],
+    [
+     "WARN",
+     "No price for SPY",
+     "Couldn't get a current price, so the bot didn't buy it."
+    ],
+    [
+     "INFO",
+     ":moneybag: Bought AAPL",
+     "\u2022 Bought 201 shares of AAPL at $99.40 each\n\u2022 Total: $19,979.40\n\u2022 Stop-loss is at $98.50"
+    ],
+    [
+     "INFO",
+     "Selling AAPL",
+     "Placed a market order to sell 201 shares (gap filled). The old stop-loss was cancelled first because this sale replaces it."
+    ]
+   ],
+   "broker": [
+    [
+     "account"
+    ],
+    [
+     "verify",
+     true
+    ],
+    [
+     "account"
+    ],
+    [
+     "entry",
+     "AAPL",
+     201,
+     99.5,
+     98.5,
+     "2026-10-05-AAPL-ientry"
+    ],
+    [
+     "cancel",
+     "o1"
+    ],
+    [
+     "sell",
+     "AAPL",
+     201,
+     "2026-10-05-AAPL-exit-gap_filled"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [
+     {
+      "key": "ientry:2026-10-05:AAPL",
+      "value": "2026-10-05 09:50:00"
+     }
+    ],
+    "orders": [
+     {
+      "alpaca_id": "o3",
+      "client_order_id": "2026-10-05-AAPL-exit-gap_filled",
+      "created_at": "2026-10-05T10:12:00-04:00",
+      "limit_price": null,
+      "qty": 201.0,
+      "side": "sell",
+      "status": "new",
+      "stop_price": null,
+      "symbol": "AAPL",
+      "type": "market",
+      "updated_at": "2026-10-05T10:12:00-04:00"
+     },
+     {
+      "alpaca_id": "o2",
+      "client_order_id": "2026-10-05-AAPL-ientry",
+      "created_at": "2026-10-05T09:57:00-04:00",
+      "limit_price": 99.5,
+      "qty": 201.0,
+      "side": "buy",
+      "status": "new",
+      "stop_price": 98.5,
+      "symbol": "AAPL",
+      "type": "limit",
+      "updated_at": "2026-10-05T09:57:00-04:00"
+     }
+    ],
+    "plans": [],
+    "positions": [
+     {
+      "days_held": 0,
+      "entry_date": "2026-10-05",
+      "entry_price": 99.4,
+      "initial_stop": 98.5,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 201,
+      "shares_initial": 201,
+      "signature": "unknown",
+      "stop": 98.5,
+      "stop_order_id": null,
+      "symbol": "AAPL",
+      "win_prob": null
+     }
+    ],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"gap_fill\", \"mode\": \"intraday\", \"bar\": \"2026-10-05 09:50:00\", \"close\": 98.7}",
+      "id": 1,
+      "lower_bound": 0.7288586692020038,
+      "reason": "entered",
+      "sample_size": 0,
+      "signature": "gap_fill|mid|far",
+      "symbol": "AAPL",
+      "taken": 1,
+      "win_prob": 0.8
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  }
+ ],
+ "intraday_scan_and_flatten": [
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 0 possible trades\n\u2022 Planning 0 buys\n\u2022 Mode: paper trading, intraday (orb_breakout)\n\n*Note*\n\u2022 intraday mode, orb_breakout, flat by 15:50"
+    ],
+    [
+     "WARN",
+     "No price for SPY",
+     "Couldn't get a current price, so the bot didn't buy it."
+    ],
+    [
+     "INFO",
+     "Buy order placed: AAPL",
+     "Buying up to 196 shares of AAPL at $101.60 or less (up to $19,913.60). Stop-loss $100.26. Estimated win chance 80%."
+    ],
+    [
+     "INFO",
+     ":moneybag: Bought AAPL",
+     "\u2022 Bought 196 shares of AAPL at $101.50 each\n\u2022 Total: $19,894.00\n\u2022 Stop-loss is at $100.26"
+    ],
+    [
+     "CRITICAL",
+     "MSFT had no stop-loss",
+     "Placed a stop-loss at $280.00 for 5 shares."
+    ],
+    [
+     "INFO",
+     "Selling AAPL",
+     "Placed a market order to sell 196 shares (closing out before the end of the day). The old stop-loss was cancelled first because this sale replaces it."
+    ],
+    [
+     "CRITICAL",
+     "MSFT was left open",
+     "It was bought before today (swing mode or by hand), so the bot didn't sell it. Its stop-loss stays; please manage it yourself."
+    ],
+    [
+     "CRITICAL",
+     "AAPL had no stop-loss",
+     "Placed a stop-loss at $100.26 for 196 shares."
+    ],
+    [
+     "WARN",
+     "Some steps didn't run today",
+     "These scheduled steps didn't run: end-of-day close-out, morning check, intraday scan."
+    ],
+    [
+     "INFO",
+     ":bar_chart: End of day Mon Oct 5",
+     "Account value $100,000.00 (up $0.00 today), 0.0% below its peak.\nHolding: AAPL, MSFT. Sold today: 0.\nWarnings: none\nNeeds a look: AAPL: held overnight in intraday mode; manage by hand; MSFT: held overnight in intraday mode; manage by hand; these steps didn't run today: end-of-day close-out, morning check, intraday scan"
+    ]
+   ],
+   "broker": [
+    [
+     "account"
+    ],
+    [
+     "verify",
+     true
+    ],
+    [
+     "account"
+    ],
+    [
+     "entry",
+     "AAPL",
+     196,
+     101.6,
+     100.26,
+     "2026-10-05-AAPL-ientry"
+    ],
+    [
+     "stop",
+     "MSFT",
+     5,
+     280.0,
+     "2026-10-05-MSFT-protect-1551"
+    ],
+    [
+     "cancel",
+     "o1"
+    ],
+    [
+     "sell",
+     "AAPL",
+     196,
+     "2026-10-05-AAPL-exit-flatten"
+    ],
+    [
+     "stop",
+     "AAPL",
+     196,
+     100.26,
+     "2026-10-05-AAPL-protect-1556"
+    ],
+    [
+     "account"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [
+     {
+      "cash": 100000.0,
+      "day": "2026-10-02",
+      "equity": 100000.0
+     },
+     {
+      "cash": 80106.0,
+      "day": "2026-10-05",
+      "equity": 100000.0
+     }
+    ],
+    "flags": [],
+    "kv": [
+     {
+      "key": "ientry:2026-10-05:AAPL",
+      "value": "2026-10-05 10:05:00"
+     },
+     {
+      "key": "once:overnight_hold:2026-10-05:MSFT",
+      "value": "1"
+     }
+    ],
+    "orders": [
+     {
+      "alpaca_id": "o4",
+      "client_order_id": "2026-10-05-AAPL-exit-flatten",
+      "created_at": "2026-10-05T15:51:00-04:00",
+      "limit_price": null,
+      "qty": 196.0,
+      "side": "sell",
+      "status": "new",
+      "stop_price": null,
+      "symbol": "AAPL",
+      "type": "market",
+      "updated_at": "2026-10-05T15:51:00-04:00"
+     },
+     {
+      "alpaca_id": "o2",
+      "client_order_id": "2026-10-05-AAPL-ientry",
+      "created_at": "2026-10-05T10:12:00-04:00",
+      "limit_price": 101.6,
+      "qty": 196.0,
+      "side": "buy",
+      "status": "new",
+      "stop_price": 100.26,
+      "symbol": "AAPL",
+      "type": "limit",
+      "updated_at": "2026-10-05T10:12:00-04:00"
+     },
+     {
+      "alpaca_id": "o5",
+      "client_order_id": "2026-10-05-AAPL-protect-1556",
+      "created_at": "2026-10-05T15:56:00-04:00",
+      "limit_price": null,
+      "qty": 196.0,
+      "side": "sell",
+      "status": "new",
+      "stop_price": 100.26,
+      "symbol": "AAPL",
+      "type": "stop",
+      "updated_at": "2026-10-05T15:56:00-04:00"
+     },
+     {
+      "alpaca_id": "o3",
+      "client_order_id": "2026-10-05-MSFT-protect-1551",
+      "created_at": "2026-10-05T15:51:00-04:00",
+      "limit_price": null,
+      "qty": 5.0,
+      "side": "sell",
+      "status": "new",
+      "stop_price": 280.0,
+      "symbol": "MSFT",
+      "type": "stop",
+      "updated_at": "2026-10-05T15:51:00-04:00"
+     }
+    ],
+    "plans": [],
+    "positions": [
+     {
+      "days_held": 0,
+      "entry_date": "2026-10-05",
+      "entry_price": 101.5,
+      "initial_stop": 100.26,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 196,
+      "shares_initial": 196,
+      "signature": "unknown",
+      "stop": 100.26,
+      "stop_order_id": "o5",
+      "symbol": "AAPL",
+      "win_prob": null
+     },
+     {
+      "days_held": 5,
+      "entry_date": "2026-09-28",
+      "entry_price": 300.0,
+      "initial_stop": 280.0,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 5,
+      "shares_initial": 5,
+      "signature": "sig",
+      "stop": 280.0,
+      "stop_order_id": "o3",
+      "symbol": "MSFT",
+      "win_prob": 0.8
+     }
+    ],
+    "runs": [],
+    "shadow_trades": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"orb_breakout\", \"mode\": \"intraday\", \"bar\": \"2026-10-05 10:05:00\", \"close\": 101.4}",
+      "id": 1,
+      "lower_bound": 0.7288586692020038,
+      "reason": "entered",
+      "sample_size": 0,
+      "signature": "orb_breakout|mid|up",
+      "symbol": "AAPL",
+      "taken": 1,
+      "win_prob": 0.8
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {
+    "packs/daily-2026-10-05.md": "# Daily pack 2026-10-05\nLegend: exits STOP initial stop, TRAIL trailing/breakeven stop, TIME time stop, TREND close < SMA50, TGT partial at +2R. Signatures TP-<SPY trend><SPY vol><trend strength><pullback depth><EMA distance>.\n\n## Account\nequity 100,000 | day P&L +0.00 (0.0%) | drawdown 0.0%\n\n## Flags\nkill_switch=no paused=no\n\n## Anomalies\n- AAPL: held overnight in intraday mode; manage by hand\n- MSFT: held overnight in intraday mode; manage by hand\n- these steps didn't run today: end-of-day close-out, morning check, intraday scan\n\n## Fills\n| sym | side | qty | price |\n|---|---|---|---|\n| AAPL | buy | 196 | 101.50 |\n\n## Open positions\n| sym | sh | entry | stop | R | days | sig |\n|---|---|---|---|---|---|---|\n| AAPL | 196 | 101.50 | 100.26 | +0.00 | 0 | TP-? |\n| MSFT | 5 | 300.00 | 280.00 | +0.00 | 5 | TP-? |\n",
+    "state.json": "{\n \"as_of\": \"2026-10-05T16:20:00-04:00\",\n \"mode\": \"paper\",\n \"equity\": 100000.0,\n \"peak_equity\": 100000.0,\n \"drawdown_pct\": 0.0,\n \"flags\": {\n  \"kill_switch\": false,\n  \"paused\": false\n },\n \"open_positions\": [\n  {\n   \"symbol\": \"AAPL\",\n   \"shares\": 196,\n   \"entry\": 101.5,\n   \"stop\": 100.26,\n   \"r_multiple\": 0.0,\n   \"days_held\": 0\n  },\n  {\n   \"symbol\": \"MSFT\",\n   \"shares\": 5,\n   \"entry\": 300.0,\n   \"stop\": 280.0,\n   \"r_multiple\": 0.0,\n   \"days_held\": 5\n  }\n ],\n \"last_runs\": {},\n \"strategy_version\": \"trend-pullback-v1\"\n}\n"
+   }
+  }
+ ],
+ "intraday_stale_entry_cancel": [
+  {
+   "alerts": [
+    [
+     "WARN",
+     "No price for SPY",
+     "Couldn't get a current price, so the bot didn't buy it."
+    ],
+    [
+     "INFO",
+     "Buy order placed: AAPL",
+     "Buying up to 196 shares of AAPL at $101.60 or less (up to $19,913.60). Stop-loss $100.26. Estimated win chance 80%."
+    ]
+   ],
+   "broker": [
+    [
+     "account"
+    ],
+    [
+     "verify",
+     true
+    ],
+    [
+     "account"
+    ],
+    [
+     "entry",
+     "AAPL",
+     196,
+     101.6,
+     100.26,
+     "2026-10-05-AAPL-ientry"
+    ],
+    [
+     "cancel",
+     "o2"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [
+     {
+      "key": "ientry:2026-10-05:AAPL",
+      "value": "2026-10-05 10:05:00"
+     }
+    ],
+    "orders": [
+     {
+      "alpaca_id": "o2",
+      "client_order_id": "2026-10-05-AAPL-ientry",
+      "created_at": "2026-10-05T10:12:00-04:00",
+      "limit_price": 101.6,
+      "qty": 196.0,
+      "side": "buy",
+      "status": "canceled",
+      "stop_price": 100.26,
+      "symbol": "AAPL",
+      "type": "limit",
+      "updated_at": "2026-10-05T10:25:00-04:00"
+     }
+    ],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"orb_breakout\", \"mode\": \"intraday\", \"bar\": \"2026-10-05 10:05:00\", \"close\": 101.4}",
+      "id": 1,
+      "lower_bound": 0.7288586692020038,
+      "reason": "entered",
+      "sample_size": 0,
+      "signature": "orb_breakout|mid|up",
+      "symbol": "AAPL",
+      "taken": 1,
+      "win_prob": 0.8
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  }
+ ],
+ "swing_batch_cash_and_sectors": [
+  {
+   "alerts": [
+    [
+     "INFO",
+     "Buy order placed: AAPL",
+     "Buying up to 147 shares of AAPL at $120.24 or less (up to $17,675.28). Stop-loss $113.44. Estimated win chance 80%."
+    ],
+    [
+     "INFO",
+     "Buy order placed: MSFT",
+     "Buying up to 44 shares of MSFT at $120.24 or less (up to $5,290.56). Stop-loss $113.44. Estimated win chance 80%."
+    ]
+   ],
+   "broker": [
+    [
+     "verify",
+     true
+    ],
+    [
+     "account"
+    ],
+    [
+     "entry",
+     "AAPL",
+     147,
+     120.24,
+     113.44,
+     "2026-10-05-AAPL-entry"
+    ],
+    [
+     "account"
+    ],
+    [
+     "entry",
+     "MSFT",
+     44,
+     120.24,
+     113.44,
+     "2026-10-05-MSFT-entry"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [
+     {
+      "alpaca_id": "o2",
+      "client_order_id": "2026-10-05-AAPL-entry",
+      "created_at": "2026-10-05T09:50:00-04:00",
+      "limit_price": 120.24,
+      "qty": 147.0,
+      "side": "buy",
+      "status": "new",
+      "stop_price": 113.44,
+      "symbol": "AAPL",
+      "type": "limit",
+      "updated_at": "2026-10-05T09:50:00-04:00"
+     },
+     {
+      "alpaca_id": "o4",
+      "client_order_id": "2026-10-05-MSFT-entry",
+      "created_at": "2026-10-05T09:50:00-04:00",
+      "limit_price": 120.24,
+      "qty": 44.0,
+      "side": "buy",
+      "status": "new",
+      "stop_price": 113.44,
+      "symbol": "MSFT",
+      "type": "limit",
+      "updated_at": "2026-10-05T09:50:00-04:00"
+     }
+    ],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 119.0,
+      "momentum": 0.3,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     },
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 119.0,
+      "momentum": 0.3,
+      "rank": 2,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "MSFT",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  }
+ ],
+ "swing_blocks": [
+  {
+   "alerts": [
+    [
+     "CRITICAL",
+     "Buying paused: couldn't confirm the account is cash-only",
+     "The bot couldn't confirm that borrowing money (margin) and short selling are switched off on the account, so it won't buy anything until it can."
+    ]
+   ],
+   "broker": [
+    [
+     "verify",
+     true
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 119.0,
+      "momentum": 0.3,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "WARN",
+     "Couldn't reach the broker, so no orders were placed",
+     "Technical detail: get_account failed"
+    ]
+   ],
+   "broker": [
+    [
+     "verify",
+     true
+    ],
+    [
+     "account"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 119.0,
+      "momentum": 0.3,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [
+     {
+      "name": "paused",
+      "reason": "test",
+      "set_at": "2026-10-05T08:00:00-04:00",
+      "value": 1
+     }
+    ],
+    "kv": [],
+    "orders": [],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 119.0,
+      "momentum": 0.3,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [
+     {
+      "name": "halt_today",
+      "reason": "test",
+      "set_at": "2026-10-05T08:00:00-04:00",
+      "value": 1
+     }
+    ],
+    "kv": [
+     {
+      "key": "halt_day",
+      "value": "2026-10-05"
+     }
+    ],
+    "orders": [],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 119.0,
+      "momentum": 0.3,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 119.0,
+      "momentum": 0.3,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 119.0,
+      "momentum": 0.3,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 119.0,
+      "momentum": 0.3,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  }
+ ],
+ "swing_dry_run_batch": [
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 1 possible trade\n\u2022 Planning 1 buy\n\u2022 Mode: dry run, no real orders\n\n*Buy: possible trades today*\n```\nStock  Win chance  Decision               Reason\n------------------------------------------------------------------------------\nAAPL   80%         Buy (plan #1)          Uptrend, sharp dip, up 40% in 6 mo\n```\n\n*Sell:* nothing planned today."
+    ],
+    [
+     "INFO",
+     "Buy order placed (dry run): AAPL",
+     "Buying up to 147 shares of AAPL at $120.24 or less (up to $17,675.28). Stop-loss $113.44. Estimated win chance 80%."
+    ],
+    [
+     "INFO",
+     "Buy order placed (dry run): MSFT",
+     "Buying up to 147 shares of MSFT at $120.24 or less (up to $17,675.28). Stop-loss $113.44. Estimated win chance 80%."
+    ],
+    [
+     "CRITICAL",
+     "SPY had no stop-loss",
+     "The price ($90.00) was already below the stop-loss ($95.00), so the bot sold 10 shares right away."
+    ]
+   ],
+   "broker": [
+    [
+     "verify",
+     true
+    ],
+    [
+     "account"
+    ],
+    [
+     "entry",
+     "AAPL",
+     147,
+     120.24,
+     113.44,
+     "2026-10-05-AAPL-entry"
+    ],
+    [
+     "account"
+    ],
+    [
+     "entry",
+     "MSFT",
+     147,
+     120.24,
+     113.44,
+     "2026-10-05-MSFT-entry"
+    ],
+    [
+     "stop",
+     "SPY",
+     10,
+     95.0,
+     "s-SPY"
+    ],
+    [
+     "sell",
+     "SPY",
+     10,
+     "2026-10-05-SPY-protect-1030"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [
+     {
+      "alpaca_id": null,
+      "client_order_id": "2026-10-05-AAPL-entry",
+      "created_at": "2026-10-05T09:50:00-04:00",
+      "limit_price": 120.24,
+      "qty": 147.0,
+      "side": "buy",
+      "status": "dry_run",
+      "stop_price": 113.44,
+      "symbol": "AAPL",
+      "type": "limit",
+      "updated_at": "2026-10-05T09:50:00-04:00"
+     },
+     {
+      "alpaca_id": null,
+      "client_order_id": "2026-10-05-MSFT-entry",
+      "created_at": "2026-10-05T09:50:00-04:00",
+      "limit_price": 120.24,
+      "qty": 147.0,
+      "side": "buy",
+      "status": "dry_run",
+      "stop_price": 113.44,
+      "symbol": "MSFT",
+      "type": "limit",
+      "updated_at": "2026-10-05T09:50:00-04:00"
+     },
+     {
+      "alpaca_id": null,
+      "client_order_id": "2026-10-05-SPY-protect-1030",
+      "created_at": "2026-10-05T10:30:00-04:00",
+      "limit_price": null,
+      "qty": 10.0,
+      "side": "sell",
+      "status": "dry_run",
+      "stop_price": 95.0,
+      "symbol": "SPY",
+      "type": "stop",
+      "updated_at": "2026-10-05T10:30:00-04:00"
+     }
+    ],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 119.0,
+      "momentum": 0.3,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     },
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 119.0,
+      "momentum": 0.3,
+      "rank": 2,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "MSFT",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 100.0,
+      "initial_stop": 95.0,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 10,
+      "shares_initial": 10,
+      "signature": "up|low|strong|deep|near",
+      "stop": 95.0,
+      "stop_order_id": "o1",
+      "symbol": "SPY",
+      "win_prob": 0.8
+     }
+    ],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 234.58, \"atr\": 3.3956, \"score\": 0.3971, \"flags\": [\"earnings date unknown (policy=flag)\"], \"rsi_min\": 2.15, \"momentum\": 0.3971, \"lower_bound\": 0.7289}",
+      "id": 1,
+      "lower_bound": 0.7289,
+      "reason": "planned",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "taken": 1,
+      "win_prob": 0.8
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  }
+ ],
+ "swing_eod_variants": [
+  {
+   "alerts": [
+    [
+     "CRITICAL",
+     "Cash went negative",
+     "Cash is -$5.00. Buying is paused until you check the account."
+    ],
+    [
+     "WARN",
+     "Some steps didn't run today",
+     "These scheduled steps didn't run: buying, stop-loss and exit check, morning check."
+    ],
+    [
+     "INFO",
+     ":bar_chart: End of day Mon Oct 5",
+     "Account value $100,500.00 (up $500.00 today), 0.0% below its peak.\nHolding: MSFT. Sold today: 0.\nWarnings: paused\nNeeds a look: these steps didn't run today: buying, stop-loss and exit check, morning check"
+    ]
+   ],
+   "broker": [
+    [
+     "stop",
+     "MSFT",
+     10,
+     96.0,
+     "s-MSFT"
+    ],
+    [
+     "account"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [
+     {
+      "cash": 100000.0,
+      "day": "2026-09-01",
+      "equity": 100000.0
+     },
+     {
+      "cash": 100000.0,
+      "day": "2026-10-02",
+      "equity": 100000.0
+     },
+     {
+      "cash": -5.0,
+      "day": "2026-10-05",
+      "equity": 100500.0
+     }
+    ],
+    "flags": [
+     {
+      "name": "paused",
+      "reason": "negative cash (margin used)",
+      "set_at": "2026-10-05T16:20:00-04:00",
+      "value": 1
+     }
+    ],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 100.0,
+      "initial_stop": 96.0,
+      "partial_taken": 0,
+      "pending_exit": "[\"profit_target\", 10]",
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 10,
+      "shares_initial": 10,
+      "signature": "up|low|strong|deep|near",
+      "stop": 178.18,
+      "stop_order_id": "o1",
+      "symbol": "MSFT",
+      "win_prob": 0.8
+     }
+    ],
+    "runs": [],
+    "shadow_trades": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {
+    "packs/daily-2026-10-05.md": "# Daily pack 2026-10-05\nLegend: exits STOP initial stop, TRAIL trailing/breakeven stop, TIME time stop, TREND close < SMA50, TGT partial at +2R. Signatures TP-<SPY trend><SPY vol><trend strength><pullback depth><EMA distance>.\n\n## Account\nequity 100,500 | day P&L +500.00 (0.5%) | drawdown 0.0%\n\n## Flags\nkill_switch=no paused=yes\n\n## Anomalies\n- these steps didn't run today: buying, stop-loss and exit check, morning check\n\n## Open positions\n| sym | sh | entry | stop | R | days | sig |\n|---|---|---|---|---|---|---|\n| MSFT | 10 | 100.00 | 178.18 | +1.25 | 1 | TP-ULSDN |\n",
+    "state.json": "{\n \"as_of\": \"2026-10-05T16:20:00-04:00\",\n \"mode\": \"paper\",\n \"equity\": 100500.0,\n \"peak_equity\": 100500.0,\n \"drawdown_pct\": 0.0,\n \"flags\": {\n  \"kill_switch\": false,\n  \"paused\": true\n },\n \"open_positions\": [\n  {\n   \"symbol\": \"MSFT\",\n   \"shares\": 10,\n   \"entry\": 100.0,\n   \"stop\": 178.18,\n   \"r_multiple\": 1.25,\n   \"days_held\": 1\n  }\n ],\n \"last_runs\": {},\n \"strategy_version\": \"trend-pullback-v1\"\n}\n"
+   }
+  },
+  {
+   "alerts": [
+    [
+     "CRITICAL",
+     "Safety stop: big daily loss",
+     "daily loss -4.00%. No new orders on Tue Oct 6."
+    ],
+    [
+     "WARN",
+     "Some steps didn't run today",
+     "These scheduled steps didn't run: buying, stop-loss and exit check, morning check."
+    ],
+    [
+     "INFO",
+     ":bar_chart: End of day Mon Oct 5",
+     "Account value $96,000.00 (down $4,000.00 today), 4.0% below its peak.\nHolding: MSFT. Sold today: 0.\nWarnings: kill_switch\nNeeds a look: these steps didn't run today: buying, stop-loss and exit check, morning check"
+    ]
+   ],
+   "broker": [
+    [
+     "stop",
+     "MSFT",
+     10,
+     96.0,
+     "s-MSFT"
+    ],
+    [
+     "account"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [
+     {
+      "cash": 100000.0,
+      "day": "2026-09-01",
+      "equity": 100000.0
+     },
+     {
+      "cash": 100000.0,
+      "day": "2026-10-02",
+      "equity": 100000.0
+     },
+     {
+      "cash": 100000.0,
+      "day": "2026-10-05",
+      "equity": 96000.0
+     }
+    ],
+    "flags": [
+     {
+      "name": "halt_today",
+      "reason": "daily loss -4.00%",
+      "set_at": "2026-10-05T16:20:00-04:00",
+      "value": 1
+     }
+    ],
+    "kv": [
+     {
+      "key": "halt_day",
+      "value": "2026-10-06"
+     }
+    ],
+    "orders": [],
+    "plans": [],
+    "positions": [
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 100.0,
+      "initial_stop": 96.0,
+      "partial_taken": 0,
+      "pending_exit": "[\"profit_target\", 10]",
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 10,
+      "shares_initial": 10,
+      "signature": "up|low|strong|deep|near",
+      "stop": 178.18,
+      "stop_order_id": "o1",
+      "symbol": "MSFT",
+      "win_prob": 0.8
+     }
+    ],
+    "runs": [],
+    "shadow_trades": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {
+    "packs/daily-2026-10-05.md": "# Daily pack 2026-10-05\nLegend: exits STOP initial stop, TRAIL trailing/breakeven stop, TIME time stop, TREND close < SMA50, TGT partial at +2R. Signatures TP-<SPY trend><SPY vol><trend strength><pullback depth><EMA distance>.\n\n## Account\nequity 96,000 | day P&L -4,000.00 (-4.0%) | drawdown 4.0%\n\n## Flags\nkill_switch=yes paused=no\n\n## Anomalies\n- these steps didn't run today: buying, stop-loss and exit check, morning check\n\n## Open positions\n| sym | sh | entry | stop | R | days | sig |\n|---|---|---|---|---|---|---|\n| MSFT | 10 | 100.00 | 178.18 | +1.25 | 1 | TP-ULSDN |\n",
+    "state.json": "{\n \"as_of\": \"2026-10-05T16:20:00-04:00\",\n \"mode\": \"paper\",\n \"equity\": 96000.0,\n \"peak_equity\": 100000.0,\n \"drawdown_pct\": 4.0,\n \"flags\": {\n  \"kill_switch\": true,\n  \"paused\": false\n },\n \"open_positions\": [\n  {\n   \"symbol\": \"MSFT\",\n   \"shares\": 10,\n   \"entry\": 100.0,\n   \"stop\": 178.18,\n   \"r_multiple\": 1.25,\n   \"days_held\": 1\n  }\n ],\n \"last_runs\": {},\n \"strategy_version\": \"trend-pullback-v1\"\n}\n"
+   }
+  },
+  {
+   "alerts": [
+    [
+     "CRITICAL",
+     "Safety stop: bot paused after a drawdown",
+     "The account fell too far from its peak. The bot won't trade until you resume it."
+    ],
+    [
+     "WARN",
+     "Some steps didn't run today",
+     "These scheduled steps didn't run: buying, stop-loss and exit check, morning check."
+    ],
+    [
+     "INFO",
+     ":bar_chart: End of day Mon Oct 5",
+     "Account value $89,000.00 (down $1,000.00 today), 11.0% below its peak.\nHolding: MSFT. Sold today: 0.\nWarnings: paused\nNeeds a look: these steps didn't run today: buying, stop-loss and exit check, morning check"
+    ]
+   ],
+   "broker": [
+    [
+     "stop",
+     "MSFT",
+     10,
+     96.0,
+     "s-MSFT"
+    ],
+    [
+     "account"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [
+     {
+      "cash": 100000.0,
+      "day": "2026-09-01",
+      "equity": 100000.0
+     },
+     {
+      "cash": 90000.0,
+      "day": "2026-10-02",
+      "equity": 90000.0
+     },
+     {
+      "cash": 100000.0,
+      "day": "2026-10-05",
+      "equity": 89000.0
+     }
+    ],
+    "flags": [
+     {
+      "name": "paused",
+      "reason": "drawdown -11.00% from peak",
+      "set_at": "2026-10-05T16:20:00-04:00",
+      "value": 1
+     }
+    ],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 100.0,
+      "initial_stop": 96.0,
+      "partial_taken": 0,
+      "pending_exit": "[\"profit_target\", 10]",
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 10,
+      "shares_initial": 10,
+      "signature": "up|low|strong|deep|near",
+      "stop": 178.18,
+      "stop_order_id": "o1",
+      "symbol": "MSFT",
+      "win_prob": 0.8
+     }
+    ],
+    "runs": [],
+    "shadow_trades": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {
+    "packs/daily-2026-10-05.md": "# Daily pack 2026-10-05\nLegend: exits STOP initial stop, TRAIL trailing/breakeven stop, TIME time stop, TREND close < SMA50, TGT partial at +2R. Signatures TP-<SPY trend><SPY vol><trend strength><pullback depth><EMA distance>.\n\n## Account\nequity 89,000 | day P&L -1,000.00 (-1.1%) | drawdown 11.0%\n\n## Flags\nkill_switch=no paused=yes\n\n## Anomalies\n- these steps didn't run today: buying, stop-loss and exit check, morning check\n\n## Open positions\n| sym | sh | entry | stop | R | days | sig |\n|---|---|---|---|---|---|---|\n| MSFT | 10 | 100.00 | 178.18 | +1.25 | 1 | TP-ULSDN |\n",
+    "state.json": "{\n \"as_of\": \"2026-10-05T16:20:00-04:00\",\n \"mode\": \"paper\",\n \"equity\": 89000.0,\n \"peak_equity\": 100000.0,\n \"drawdown_pct\": 11.0,\n \"flags\": {\n  \"kill_switch\": false,\n  \"paused\": true\n },\n \"open_positions\": [\n  {\n   \"symbol\": \"MSFT\",\n   \"shares\": 10,\n   \"entry\": 100.0,\n   \"stop\": 178.18,\n   \"r_multiple\": 1.25,\n   \"days_held\": 1\n  }\n ],\n \"last_runs\": {},\n \"strategy_version\": \"trend-pullback-v1\"\n}\n"
+   }
+  },
+  {
+   "alerts": [
+    [
+     "WARN",
+     "Some steps didn't run today",
+     "These scheduled steps didn't run: buying, stop-loss and exit check, morning check."
+    ],
+    [
+     "INFO",
+     "The AI review didn't happen",
+     "No review was found for 2026-10-02."
+    ],
+    [
+     "INFO",
+     ":bar_chart: End of day Mon Oct 5",
+     "Account value $100,000.00 (up $0.00 today), 0.0% below its peak.\nHolding: AAPL. Sold today: 0.\nWarnings: none\nNeeds a look: AAPL: no bar for 2026-10-05; stop/exit not updated; these steps didn't run today: buying, stop-loss and exit check, morning check"
+    ]
+   ],
+   "broker": [
+    [
+     "stop",
+     "AAPL",
+     10,
+     95.0,
+     "s-AAPL"
+    ],
+    [
+     "account"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [
+     {
+      "cash": 100000.0,
+      "day": "2026-09-01",
+      "equity": 100000.0
+     },
+     {
+      "cash": 100000.0,
+      "day": "2026-10-02",
+      "equity": 100000.0
+     },
+     {
+      "cash": 100000.0,
+      "day": "2026-10-05",
+      "equity": 100000.0
+     }
+    ],
+    "flags": [],
+    "kv": [
+     {
+      "key": "review_fired:2026-10-02",
+      "value": "1"
+     }
+    ],
+    "orders": [],
+    "plans": [],
+    "positions": [
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 100.0,
+      "initial_stop": 95.0,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 10,
+      "shares_initial": 10,
+      "signature": "up|low|strong|deep|near",
+      "stop": 95.0,
+      "stop_order_id": "o1",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "runs": [],
+    "shadow_trades": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {
+    "packs/daily-2026-10-05.md": "# Daily pack 2026-10-05\nLegend: exits STOP initial stop, TRAIL trailing/breakeven stop, TIME time stop, TREND close < SMA50, TGT partial at +2R. Signatures TP-<SPY trend><SPY vol><trend strength><pullback depth><EMA distance>.\n\n## Account\nequity 100,000 | day P&L +0.00 (0.0%) | drawdown 0.0%\n\n## Flags\nkill_switch=no paused=no\n\n## Anomalies\n- AAPL: no bar for 2026-10-05; stop/exit not updated\n- these steps didn't run today: buying, stop-loss and exit check, morning check\n\n## Open positions\n| sym | sh | entry | stop | R | days | sig |\n|---|---|---|---|---|---|---|\n| AAPL | 10 | 100.00 | 95.00 | +4.00 | 1 | TP-ULSDN |\n",
+    "state.json": "{\n \"as_of\": \"2026-10-05T16:20:00-04:00\",\n \"mode\": \"paper\",\n \"equity\": 100000.0,\n \"peak_equity\": 100000.0,\n \"drawdown_pct\": 0.0,\n \"flags\": {\n  \"kill_switch\": false,\n  \"paused\": false\n },\n \"open_positions\": [\n  {\n   \"symbol\": \"AAPL\",\n   \"shares\": 10,\n   \"entry\": 100.0,\n   \"stop\": 95.0,\n   \"r_multiple\": 4.0,\n   \"days_held\": 1\n  }\n ],\n \"last_runs\": {},\n \"strategy_version\": \"trend-pullback-v1\"\n}\n"
+   }
+  }
+ ],
+ "swing_exits_full_partial_and_failed": [
+  {
+   "alerts": [
+    [
+     "INFO",
+     "Selling AAPL",
+     "Placed a market order to sell 50 shares (taking some profit)."
+    ],
+    [
+     "INFO",
+     "Selling MSFT",
+     "Placed a market order to sell 100 shares (trend break). The old stop-loss was cancelled first because this sale replaces it."
+    ]
+   ],
+   "broker": [
+    [
+     "stop",
+     "MSFT",
+     100,
+     96.0,
+     "s-MSFT"
+    ],
+    [
+     "stop",
+     "AAPL",
+     100,
+     104.8,
+     "s-AAPL"
+    ],
+    [
+     "replace",
+     "o2",
+     null,
+     50
+    ],
+    [
+     "sell",
+     "AAPL",
+     50,
+     "2026-10-05-AAPL-partial"
+    ],
+    [
+     "cancel",
+     "o1"
+    ],
+    [
+     "sell",
+     "MSFT",
+     100,
+     "2026-10-05-MSFT-exit-trend_break"
+    ],
+    [
+     "verify",
+     true
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [
+     {
+      "alpaca_id": "o3",
+      "client_order_id": "2026-10-05-AAPL-partial",
+      "created_at": "2026-10-05T09:50:00-04:00",
+      "limit_price": null,
+      "qty": 50.0,
+      "side": "sell",
+      "status": "new",
+      "stop_price": null,
+      "symbol": "AAPL",
+      "type": "market",
+      "updated_at": "2026-10-05T09:50:00-04:00"
+     },
+     {
+      "alpaca_id": "o4",
+      "client_order_id": "2026-10-05-MSFT-exit-trend_break",
+      "created_at": "2026-10-05T09:50:00-04:00",
+      "limit_price": null,
+      "qty": 100.0,
+      "side": "sell",
+      "status": "new",
+      "stop_price": null,
+      "symbol": "MSFT",
+      "type": "market",
+      "updated_at": "2026-10-05T09:50:00-04:00"
+     }
+    ],
+    "plans": [],
+    "positions": [
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 100.0,
+      "initial_stop": 104.8,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 100,
+      "shares_initial": 100,
+      "signature": "up|low|strong|deep|near",
+      "stop": 104.8,
+      "stop_order_id": "o2",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     },
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 100.0,
+      "initial_stop": 96.0,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 100,
+      "shares_initial": 100,
+      "signature": "up|low|strong|deep|near",
+      "stop": 96.0,
+      "stop_order_id": null,
+      "symbol": "MSFT",
+      "win_prob": 0.8
+     }
+    ],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "CRITICAL",
+     "Couldn't sell AAPL",
+     "The broker refused the sell order. Reason given: sell rejected. The stop-loss is back in place, so the shares are still protected."
+    ],
+    [
+     "CRITICAL",
+     "Couldn't sell part of MSFT",
+     "The broker refused the sell order. Reason given: sell rejected. The stop-loss still covers all the shares."
+    ],
+    [
+     "CRITICAL",
+     "Couldn't sell AAPL",
+     "The broker refused the sell order. Reason given: sell rejected. The stop-loss is back in place, so the shares are still protected."
+    ],
+    [
+     "CRITICAL",
+     "Couldn't sell part of MSFT",
+     "The broker refused the sell order. Reason given: sell rejected. The stop-loss still covers all the shares."
+    ]
+   ],
+   "broker": [
+    [
+     "stop",
+     "MSFT",
+     100,
+     104.8,
+     "s-MSFT"
+    ],
+    [
+     "stop",
+     "AAPL",
+     100,
+     96.0,
+     "s-AAPL"
+    ],
+    [
+     "cancel",
+     "o2"
+    ],
+    [
+     "stop",
+     "AAPL",
+     100,
+     96.0,
+     "2026-10-05-AAPL-restop-0950"
+    ],
+    [
+     "replace",
+     "o1",
+     null,
+     50
+    ],
+    [
+     "replace",
+     "o1",
+     null,
+     100
+    ],
+    [
+     "verify",
+     true
+    ],
+    [
+     "cancel",
+     "o3"
+    ],
+    [
+     "stop",
+     "AAPL",
+     100,
+     96.0,
+     "2026-10-05-AAPL-restop-1000"
+    ],
+    [
+     "replace",
+     "o1",
+     null,
+     50
+    ],
+    [
+     "replace",
+     "o1",
+     null,
+     100
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 100.0,
+      "initial_stop": 96.0,
+      "partial_taken": 0,
+      "pending_exit": "[\"time_stop\", 100]",
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 100,
+      "shares_initial": 100,
+      "signature": "up|low|strong|deep|near",
+      "stop": 96.0,
+      "stop_order_id": "o4",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     },
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 100.0,
+      "initial_stop": 104.8,
+      "partial_taken": 0,
+      "pending_exit": "[\"partial_profit\", 50]",
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 100,
+      "shares_initial": 100,
+      "signature": "up|low|strong|deep|near",
+      "stop": 104.8,
+      "stop_order_id": "o1",
+      "symbol": "MSFT",
+      "win_prob": 0.8
+     }
+    ],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  }
+ ],
+ "swing_full_lifecycle": [
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 1 possible trade\n\u2022 Planning 1 buy\n\u2022 Mode: paper trading\n\n*Buy: possible trades today*\n```\nStock  Win chance  Decision               Reason\n------------------------------------------------------------------------------\nAAPL   80%         Buy (plan #1)          Uptrend, sharp dip, up 40% in 6 mo\n```\n\n*Sell:* nothing planned today."
+    ],
+    [
+     "INFO",
+     "Buy order placed: AAPL",
+     "Buying up to 147 shares of AAPL at $120.24 or less (up to $17,675.28). Stop-loss $113.44. Estimated win chance 80%."
+    ],
+    [
+     "INFO",
+     ":moneybag: Bought AAPL",
+     "\u2022 Bought 147 shares of AAPL at $120.10 each\n\u2022 Total: $17,654.70\n\u2022 Stop-loss is at $113.44"
+    ],
+    [
+     "WARN",
+     "Some steps didn't run today",
+     "These scheduled steps didn't run: buying, stop-loss and exit check, morning check."
+    ],
+    [
+     "INFO",
+     ":bar_chart: End of day Mon Oct 5",
+     "Account value $100,000.00 (up $0.00 today), 0.0% below its peak.\nHolding: AAPL. Sold today: 0.\nWarnings: none\nNeeds a look: these steps didn't run today: buying, stop-loss and exit check, morning check"
+    ],
+    [
+     "INFO",
+     ":sunrise: Morning plan for Tue Oct 6",
+     "\u2022 Found 1 possible trade\n\u2022 Planning 0 buys\n\u2022 Mode: paper trading\n\n*Buy: possible trades today*\n```\nStock  Win chance  Decision               Reason\n------------------------------------------------------------------------------\nAAPL   n/a         Skipped                Already held or ordered\n```\n\n*Sell: planned sales (at today's open)*\n```\nStock  Shares  Reason\n------------------------------------------------------------\nAAPL   147     the uptrend broke (day 0)\n```\n\n*Skipped*\n\u2022 1 setup because already held or ordered"
+    ],
+    [
+     "INFO",
+     "Selling AAPL",
+     "Placed a market order to sell 147 shares (trend break). The old stop-loss was cancelled first because this sale replaces it."
+    ],
+    [
+     "INFO",
+     ":chart_with_downwards_trend: Sold AAPL",
+     "\u2022 Sold 147 shares of AAPL at $118.00 each\n\u2022 Bought at $120.10\n\u2022 Loss: $308.70\n\u2022 Why: trend break"
+    ]
+   ],
+   "broker": [
+    [
+     "verify",
+     true
+    ],
+    [
+     "account"
+    ],
+    [
+     "entry",
+     "AAPL",
+     147,
+     120.24,
+     113.44,
+     "2026-10-05-AAPL-entry"
+    ],
+    [
+     "verify",
+     true
+    ],
+    [
+     "account"
+    ],
+    [
+     "cancel",
+     "o1"
+    ],
+    [
+     "sell",
+     "AAPL",
+     147,
+     "2026-10-06-AAPL-exit-trend_break"
+    ],
+    [
+     "verify",
+     true
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [
+     {
+      "cash": 100000.0,
+      "day": "2026-10-02",
+      "equity": 100000.0
+     },
+     {
+      "cash": 82345.3,
+      "day": "2026-10-05",
+      "equity": 100000.0
+     }
+    ],
+    "flags": [],
+    "kv": [
+     {
+      "key": "once:sell_seen:o3",
+      "value": "1"
+     }
+    ],
+    "orders": [
+     {
+      "alpaca_id": "o2",
+      "client_order_id": "2026-10-05-AAPL-entry",
+      "created_at": "2026-10-05T09:50:00-04:00",
+      "limit_price": 120.24,
+      "qty": 147.0,
+      "side": "buy",
+      "status": "new",
+      "stop_price": 113.44,
+      "symbol": "AAPL",
+      "type": "limit",
+      "updated_at": "2026-10-05T09:50:00-04:00"
+     },
+     {
+      "alpaca_id": "o3",
+      "client_order_id": "2026-10-06-AAPL-exit-trend_break",
+      "created_at": "2026-10-06T09:50:00-04:00",
+      "limit_price": null,
+      "qty": 147.0,
+      "side": "sell",
+      "status": "new",
+      "stop_price": null,
+      "symbol": "AAPL",
+      "type": "market",
+      "updated_at": "2026-10-06T09:50:00-04:00"
+     }
+    ],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 234.57984382237365,
+      "momentum": 0.3971057506851161,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [],
+    "shadow_trades": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 234.58, \"atr\": 3.3956, \"score\": 0.3971, \"flags\": [\"earnings date unknown (policy=flag)\"], \"rsi_min\": 2.15, \"momentum\": 0.3971, \"lower_bound\": 0.7289}",
+      "id": 1,
+      "lower_bound": 0.7289,
+      "reason": "planned",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "taken": 1,
+      "win_prob": 0.8
+     },
+     {
+      "day": "2026-10-06",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 234.58, \"atr\": 3.3956, \"score\": 0.3971, \"flags\": [], \"rsi_min\": 2.15, \"momentum\": 0.3971}",
+      "id": 2,
+      "lower_bound": null,
+      "reason": "already held or ordered",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "taken": 0,
+      "win_prob": null
+     }
+    ],
+    "slots": [],
+    "trades": [
+     {
+      "entry_date": "2026-10-05",
+      "entry_price": 120.1,
+      "exit_date": "2026-10-05",
+      "exit_price": 118.0,
+      "exit_reason": "trend_break",
+      "holding_days": 0,
+      "id": 1,
+      "pnl": -308.7000000000007,
+      "r_multiple": -0.3153153153153162,
+      "shares": 147,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "unsettled": [
+     {
+      "amount": 17346.0,
+      "id": 1,
+      "settles_on": "2026-10-06"
+     }
+    ]
+   },
+   "memory": {
+    "packs/daily-2026-10-05.md": "# Daily pack 2026-10-05\nLegend: exits STOP initial stop, TRAIL trailing/breakeven stop, TIME time stop, TREND close < SMA50, TGT partial at +2R. Signatures TP-<SPY trend><SPY vol><trend strength><pullback depth><EMA distance>.\n\n## Account\nequity 100,000 | day P&L +0.00 (0.0%) | drawdown 0.0%\n\n## Flags\nkill_switch=no paused=no\n\n## Anomalies\n- these steps didn't run today: buying, stop-loss and exit check, morning check\n\n## Fills\n| sym | side | qty | price |\n|---|---|---|---|\n| AAPL | buy | 147 | 120.10 |\n\n## Open positions\n| sym | sh | entry | stop | R | days | sig |\n|---|---|---|---|---|---|---|\n| AAPL | 147 | 120.10 | 113.44 | +0.00 | 0 | TP-ULSDN |\n",
+    "state.json": "{\n \"as_of\": \"2026-10-05T16:20:00-04:00\",\n \"mode\": \"paper\",\n \"equity\": 100000.0,\n \"peak_equity\": 100000.0,\n \"drawdown_pct\": 0.0,\n \"flags\": {\n  \"kill_switch\": false,\n  \"paused\": false\n },\n \"open_positions\": [\n  {\n   \"symbol\": \"AAPL\",\n   \"shares\": 147,\n   \"entry\": 120.1,\n   \"stop\": 113.44,\n   \"r_multiple\": 0.0,\n   \"days_held\": 0\n  }\n ],\n \"last_runs\": {},\n \"strategy_version\": \"trend-pullback-v1\"\n}\n"
+   }
+  }
+ ],
+ "swing_partial_fill_then_full": [
+  {
+   "alerts": [
+    [
+     "INFO",
+     "Buy order placed: AAPL",
+     "Buying up to 147 shares of AAPL at $120.24 or less (up to $17,675.28). Stop-loss $113.44. Estimated win chance 80%."
+    ],
+    [
+     "INFO",
+     ":moneybag: Bought AAPL",
+     "\u2022 Bought 147 shares of AAPL at $120.00 each\n\u2022 Total: $17,640.00\n\u2022 Stop-loss is at $113.44"
+    ],
+    [
+     "INFO",
+     "Selling AAPL",
+     "Placed a market order to sell 40 shares (taking some profit)."
+    ],
+    [
+     "INFO",
+     ":arrow_up: AAPL: stop-loss moved up",
+     "The stop-loss for your 107 shares moved up from $113.44 to $121.50. If the price falls to $121.50, the bot sells automatically. A stop-loss only ever moves up, never down."
+    ],
+    [
+     "INFO",
+     ":chart_with_upwards_trend: Sold AAPL",
+     "\u2022 Sold 147 shares of AAPL at $122.72 each\n\u2022 Bought at $120.00\n\u2022 Profit: $400.50\n\u2022 Why: taking some profit"
+    ],
+    [
+     "WARN",
+     "Some steps didn't run today",
+     "These scheduled steps didn't run: buying, stop-loss and exit check, morning check."
+    ],
+    [
+     "INFO",
+     ":bar_chart: End of day Mon Oct 5",
+     "Account value $100,000.00 (up $0.00 today), 0.0% below its peak.\nHolding: nothing. Sold today: 1.\nWarnings: none\nNeeds a look: these steps didn't run today: buying, stop-loss and exit check, morning check"
+    ]
+   ],
+   "broker": [
+    [
+     "verify",
+     true
+    ],
+    [
+     "account"
+    ],
+    [
+     "entry",
+     "AAPL",
+     147,
+     120.24,
+     113.44,
+     "2026-10-05-AAPL-entry"
+    ],
+    [
+     "replace",
+     "o1",
+     null,
+     107
+    ],
+    [
+     "sell",
+     "AAPL",
+     40,
+     "2026-10-05-AAPL-partial"
+    ],
+    [
+     "replace",
+     "o1",
+     121.5,
+     null
+    ],
+    [
+     "account"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [
+     {
+      "cash": 100400.5,
+      "day": "2026-10-05",
+      "equity": 100000.0
+     }
+    ],
+    "flags": [],
+    "kv": [
+     {
+      "key": "once:sell_seen:o1",
+      "value": "1"
+     },
+     {
+      "key": "once:sell_seen:o3",
+      "value": "1"
+     }
+    ],
+    "orders": [
+     {
+      "alpaca_id": "o2",
+      "client_order_id": "2026-10-05-AAPL-entry",
+      "created_at": "2026-10-05T09:50:00-04:00",
+      "limit_price": 120.24,
+      "qty": 147.0,
+      "side": "buy",
+      "status": "new",
+      "stop_price": 113.44,
+      "symbol": "AAPL",
+      "type": "limit",
+      "updated_at": "2026-10-05T09:50:00-04:00"
+     },
+     {
+      "alpaca_id": "o3",
+      "client_order_id": "2026-10-05-AAPL-partial",
+      "created_at": "2026-10-05T10:30:00-04:00",
+      "limit_price": null,
+      "qty": 40.0,
+      "side": "sell",
+      "status": "new",
+      "stop_price": null,
+      "symbol": "AAPL",
+      "type": "market",
+      "updated_at": "2026-10-05T10:30:00-04:00"
+     }
+    ],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 119.0,
+      "momentum": 0.3,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [],
+    "shadow_trades": [],
+    "signals": [],
+    "slots": [],
+    "trades": [
+     {
+      "entry_date": "2026-10-05",
+      "entry_price": 120.0,
+      "exit_date": "2026-10-05",
+      "exit_price": 122.72448979591837,
+      "exit_reason": "partial_profit",
+      "holding_days": 0,
+      "id": 1,
+      "pnl": 400.5,
+      "r_multiple": 0.4153185664509705,
+      "shares": 147,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "unsettled": [
+     {
+      "amount": 5040.0,
+      "id": 1,
+      "settles_on": "2026-10-06"
+     },
+     {
+      "amount": 13000.5,
+      "id": 2,
+      "settles_on": "2026-10-06"
+     }
+    ]
+   },
+   "memory": {
+    "packs/daily-2026-10-05.md": "# Daily pack 2026-10-05\nLegend: exits STOP initial stop, TRAIL trailing/breakeven stop, TIME time stop, TREND close < SMA50, TGT partial at +2R. Signatures TP-<SPY trend><SPY vol><trend strength><pullback depth><EMA distance>.\n\n## Account\nequity 100,000 | day P&L +0.00 (0.0%) | drawdown 0.0%\n\n## Flags\nkill_switch=no paused=no\n\n## Anomalies\n- these steps didn't run today: buying, stop-loss and exit check, morning check\n\n## Exits\n| sym | qty | price | P&L | R | exit |\n|---|---|---|---|---|---|\n| AAPL | 147 | 122.72 | +400.50 | +0.42 | TGT |\n\n## Fills\n| sym | side | qty | price |\n|---|---|---|---|\n| AAPL | buy | 147 | 120.00 |\n| AAPL | sell | 147 | 122.72 |\n\n## Gate health (live, last 30)\n| sig | n | win% |\n|---|---|---|\n| TP-ULSDN | 1 | 100.0% |\n",
+    "state.json": "{\n \"as_of\": \"2026-10-05T16:20:00-04:00\",\n \"mode\": \"paper\",\n \"equity\": 100000.0,\n \"peak_equity\": 100000.0,\n \"drawdown_pct\": 0.0,\n \"flags\": {\n  \"kill_switch\": false,\n  \"paused\": false\n },\n \"open_positions\": [],\n \"last_runs\": {},\n \"strategy_version\": \"trend-pullback-v1\"\n}\n"
+   }
+  }
+ ],
+ "swing_premarket_variants": [
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 1 possible trade\n\u2022 Planning 0 buys\n\u2022 Mode: paper trading\n\n*Buy: possible trades today*\n```\nStock  Win chance  Decision               Reason\n------------------------------------------------------------------------------\nAAPL   n/a         Skipped                Earnings date unknown (policy=str...\n```\n\n*Sell:* nothing planned today.\n\n*Skipped*\n\u2022 1 setup because earnings date unknown (policy=strict)"
+    ]
+   ],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 234.58, \"atr\": 3.3956, \"score\": 0.3971, \"flags\": [], \"rsi_min\": 2.15, \"momentum\": 0.3971}",
+      "id": 1,
+      "lower_bound": null,
+      "reason": "earnings date unknown (policy=strict)",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "taken": 0,
+      "win_prob": null
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "WARN",
+     "No trades: backtest results missing",
+     "<tmp>/no_evidence/evidence.json is missing. Run the backtest first."
+    ],
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 0 possible trades\n\u2022 Planning 0 buys\n\u2022 Mode: paper trading\n\n*Sell:* nothing planned today.\n\n*Note*\n\u2022 no backtest evidence"
+    ]
+   ],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 1 possible trade\n\u2022 Planning 0 buys\n\u2022 Mode: paper trading\n\n*Buy: possible trades today*\n```\nStock  Win chance  Decision               Reason\n------------------------------------------------------------------------------\nAAPL   n/a         Skipped                Strategy backtest not accepted (R...\n```\n\n*Sell:* nothing planned today.\n\n*Skipped*\n\u2022 1 setup because strategy backtest not accepted (REJECTED)"
+    ]
+   ],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 234.58, \"atr\": 3.3956, \"score\": 0.3971, \"flags\": [\"earnings date unknown (policy=flag)\"], \"rsi_min\": 2.15, \"momentum\": 0.3971}",
+      "id": 1,
+      "lower_bound": null,
+      "reason": "strategy backtest not accepted (REJECTED)",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "taken": 0,
+      "win_prob": null
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 1 possible trade\n\u2022 Planning 1 buy\n\u2022 Mode: paper trading, paper trial of trend_pullback\n\n*Buy: possible trades today*\n```\nStock  Win chance  Decision               Reason\n------------------------------------------------------------------------------\nAAPL   80%         Buy (plan #1)          Uptrend, sharp dip, up 40% in 6 mo\n```\n\n*Sell:* nothing planned today."
+    ]
+   ],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 234.57984382237365,
+      "momentum": 0.3971057506851161,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 234.58, \"atr\": 3.3956, \"score\": 0.3971, \"flags\": [\"earnings date unknown (policy=flag)\"], \"paper_trial\": true, \"rsi_min\": 2.15, \"momentum\": 0.3971, \"lower_bound\": 0.7289}",
+      "id": 1,
+      "lower_bound": 0.7289,
+      "reason": "planned",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "taken": 1,
+      "win_prob": 0.8
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "WARN",
+     "No trades: backtest is for a different strategy",
+     "<tmp>/other_strategy/evidence.json tested trend_pullback, but the bot is set to trade rsi2_reversion. Run the backtest with --strategy rsi2_reversion."
+    ],
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 0 possible trades\n\u2022 Planning 0 buys\n\u2022 Mode: paper trading\n\n*Sell:* nothing planned today.\n\n*Note*\n\u2022 evidence is for trend_pullback, not rsi2_reversion"
+    ]
+   ],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "WARN",
+     "Market data is out of date",
+     "The latest SPY price is from 2026-10-01, but 2026-10-02 is needed. No trades today."
+    ],
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 0 possible trades\n\u2022 Planning 0 buys\n\u2022 Mode: paper trading\n\n*Sell:* nothing planned today.\n\n*Note*\n\u2022 stale market data (SPY last bar 2026-10-01)"
+    ]
+   ],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 0 possible trades\n\u2022 Planning 0 buys\n\u2022 Mode: paper trading\n\n*Sell:* nothing planned today.\n\n*Note*\n\u2022 bot is paused (drawdown kill switch or manual); resume to trade"
+    ]
+   ],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [
+     {
+      "name": "paused",
+      "reason": "drawdown",
+      "set_at": "2026-10-05T08:00:00-04:00",
+      "value": 1
+     }
+    ],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 1 possible trade\n\u2022 Planning 0 buys\n\u2022 Mode: paper trading\n\n*Buy: possible trades today*\n```\nStock  Win chance  Decision               Reason\n------------------------------------------------------------------------------\nAAPL   n/a         Skipped                Already held or ordered\n```\n\n*Sell:* nothing planned today.\n\n*Skipped*\n\u2022 1 setup because already held or ordered"
+    ]
+   ],
+   "broker": [
+    [
+     "stop",
+     "AAPL",
+     10,
+     95.0,
+     "s-AAPL"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 100.0,
+      "initial_stop": 95.0,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 10,
+      "shares_initial": 10,
+      "signature": "up|low|strong|deep|near",
+      "stop": 95.0,
+      "stop_order_id": "o1",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 234.58, \"atr\": 3.3956, \"score\": 0.3971, \"flags\": [], \"rsi_min\": 2.15, \"momentum\": 0.3971}",
+      "id": 1,
+      "lower_bound": null,
+      "reason": "already held or ordered",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "taken": 0,
+      "win_prob": null
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 1 possible trade\n\u2022 Planning 1 buy\n\u2022 Mode: paper trading\n\n*Buy: possible trades today*\n```\nStock  Win chance  Decision               Reason\n------------------------------------------------------------------------------\nAAPL   80%         Buy (plan #1)          Uptrend, sharp dip, up 40% in 6 mo\n```\n\n*Sell:* nothing planned today."
+    ]
+   ],
+   "broker": [
+    [
+     "stop",
+     "X",
+     1,
+     9.0,
+     "s-X"
+    ],
+    [
+     "stop",
+     "Y",
+     1,
+     9.0,
+     "s-Y"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 234.57984382237365,
+      "momentum": 0.3971057506851161,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 10.0,
+      "initial_stop": 9.0,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 1,
+      "shares_initial": 1,
+      "signature": "up|low|strong|deep|near",
+      "stop": 9.0,
+      "stop_order_id": "o1",
+      "symbol": "X",
+      "win_prob": 0.8
+     },
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 10.0,
+      "initial_stop": 9.0,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 1,
+      "shares_initial": 1,
+      "signature": "up|low|strong|deep|near",
+      "stop": 9.0,
+      "stop_order_id": "o2",
+      "symbol": "Y",
+      "win_prob": 0.8
+     }
+    ],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 234.58, \"atr\": 3.3956, \"score\": 0.3971, \"flags\": [\"earnings date unknown (policy=flag)\"], \"rsi_min\": 2.15, \"momentum\": 0.3971, \"lower_bound\": 0.7289}",
+      "id": 1,
+      "lower_bound": 0.7289,
+      "reason": "planned",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "taken": 1,
+      "win_prob": 0.8
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 2 possible trades\n\u2022 Planning 1 buy\n\u2022 Mode: paper trading\n\n*Buy: possible trades today*\n```\nStock  Win chance  Decision               Reason\n------------------------------------------------------------------------------\nMSFT   83%         Buy (plan #1)          Uptrend, sharp dip, up 81% in 6 mo\nAAPL   80%         Skipped                No slots\n```\n\n*Sell:* nothing planned today.\n\n*Skipped*\n\u2022 1 setup because no slots"
+    ]
+   ],
+   "broker": [
+    [
+     "stop",
+     "X",
+     1,
+     9.0,
+     "s-X"
+    ],
+    [
+     "stop",
+     "Y",
+     1,
+     9.0,
+     "s-Y"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [
+     {
+      "atr": 5.6671214777373615,
+      "day": "2026-10-05",
+      "last_close": 428.68090053381894,
+      "momentum": 0.8088620631208321,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|far",
+      "symbol": "MSFT",
+      "win_prob": 0.8333333333333334
+     }
+    ],
+    "positions": [
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 10.0,
+      "initial_stop": 9.0,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 1,
+      "shares_initial": 1,
+      "signature": "up|low|strong|deep|near",
+      "stop": 9.0,
+      "stop_order_id": "o1",
+      "symbol": "X",
+      "win_prob": 0.8
+     },
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 10.0,
+      "initial_stop": 9.0,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 1,
+      "shares_initial": 1,
+      "signature": "up|low|strong|deep|near",
+      "stop": 9.0,
+      "stop_order_id": "o2",
+      "symbol": "Y",
+      "win_prob": 0.8
+     }
+    ],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 428.68, \"atr\": 5.6671, \"score\": 0.8089, \"flags\": [\"earnings date unknown (policy=flag)\"], \"rsi_min\": 4.6, \"momentum\": 0.8089, \"lower_bound\": 0.7655}",
+      "id": 1,
+      "lower_bound": 0.7655,
+      "reason": "planned",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|far",
+      "symbol": "MSFT",
+      "taken": 1,
+      "win_prob": 0.8333333333333334
+     },
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 234.58, \"atr\": 3.3956, \"score\": 0.3971, \"flags\": [\"earnings date unknown (policy=flag)\"], \"rsi_min\": 2.15, \"momentum\": 0.3971, \"lower_bound\": 0.7289}",
+      "id": 2,
+      "lower_bound": 0.7289,
+      "reason": "no slots",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "taken": 0,
+      "win_prob": 0.8
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 1 possible trade\n\u2022 Planning 0 buys\n\u2022 Mode: paper trading\n\n*Buy: possible trades today*\n```\nStock  Win chance  Decision               Reason\n------------------------------------------------------------------------------\nAAPL   80%         Skipped                No slots\n```\n\n*Sell:* nothing planned today.\n\n*Skipped*\n\u2022 1 setup because no slots"
+    ]
+   ],
+   "broker": [
+    [
+     "stop",
+     "X",
+     1,
+     9.0,
+     "s-X"
+    ],
+    [
+     "stop",
+     "Y",
+     1,
+     9.0,
+     "s-Y"
+    ],
+    [
+     "stop",
+     "Z",
+     1,
+     9.0,
+     "s-Z"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 10.0,
+      "initial_stop": 9.0,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 1,
+      "shares_initial": 1,
+      "signature": "up|low|strong|deep|near",
+      "stop": 9.0,
+      "stop_order_id": "o1",
+      "symbol": "X",
+      "win_prob": 0.8
+     },
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 10.0,
+      "initial_stop": 9.0,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 1,
+      "shares_initial": 1,
+      "signature": "up|low|strong|deep|near",
+      "stop": 9.0,
+      "stop_order_id": "o2",
+      "symbol": "Y",
+      "win_prob": 0.8
+     },
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 10.0,
+      "initial_stop": 9.0,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 1,
+      "shares_initial": 1,
+      "signature": "up|low|strong|deep|near",
+      "stop": 9.0,
+      "stop_order_id": "o3",
+      "symbol": "Z",
+      "win_prob": 0.8
+     }
+    ],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 234.58, \"atr\": 3.3956, \"score\": 0.3971, \"flags\": [\"earnings date unknown (policy=flag)\"], \"rsi_min\": 2.15, \"momentum\": 0.3971, \"lower_bound\": 0.7289}",
+      "id": 1,
+      "lower_bound": 0.7289,
+      "reason": "no slots",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "taken": 0,
+      "win_prob": 0.8
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 1 possible trade\n\u2022 Planning 0 buys\n\u2022 Mode: paper trading\n\n*Buy: possible trades today*\n```\nStock  Win chance  Decision               Reason\n------------------------------------------------------------------------------\nAAPL   80%         Skipped                The backtest results are incomplete\n```\n\n*Sell:* nothing planned today.\n\n*Skipped*\n\u2022 1 setup because the backtest results are incomplete"
+    ]
+   ],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 234.58, \"atr\": 3.3956, \"score\": 0.3971, \"flags\": [\"earnings date unknown (policy=flag)\"], \"rsi_min\": 2.15, \"momentum\": 0.3971}",
+      "id": 1,
+      "lower_bound": 0.7288586692020038,
+      "reason": "no R spread in the evidence; re-run backtest",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "taken": 0,
+      "win_prob": 0.8
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 1 possible trade\n\u2022 Planning 0 buys\n\u2022 Mode: paper trading\n\n*Buy: possible trades today*\n```\nStock  Win chance  Decision               Reason\n------------------------------------------------------------------------------\nAAPL   n/a         Skipped                Alt-data veto: news_shock_veto\n```\n\n*Sell:* nothing planned today.\n\n*Skipped*\n\u2022 1 setup because alt-data veto: news_shock_veto"
+    ]
+   ],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 234.58, \"atr\": 3.3956, \"score\": 0.3971, \"flags\": [\"earnings date unknown (policy=flag)\"], \"rsi_min\": 2.15, \"momentum\": 0.3971, \"altdata\": {\"news_shock_veto\": true}}",
+      "id": 1,
+      "lower_bound": null,
+      "reason": "alt-data veto: news_shock_veto",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "taken": 0,
+      "win_prob": null
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 1 possible trade\n\u2022 Planning 1 buy\n\u2022 Mode: paper trading\n\n*Buy: possible trades today*\n```\nStock  Win chance  Decision               Reason\n------------------------------------------------------------------------------\nAAPL   80%         Buy (plan #1)          Uptrend, sharp dip, up 40% in 6 mo\n```\n\n*Sell:* nothing planned today."
+    ]
+   ],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 234.57984382237365,
+      "momentum": 0.3971057506851161,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 234.58, \"atr\": 3.3956, \"score\": 0.3971, \"flags\": [\"earnings date unknown (policy=flag)\"], \"rsi_min\": 2.15, \"momentum\": 0.3971, \"altdata\": {\"news_shock_veto\": false}, \"lower_bound\": 0.7289}",
+      "id": 1,
+      "lower_bound": 0.7289,
+      "reason": "planned",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "taken": 1,
+      "win_prob": 0.8
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Fri Nov 27",
+     "\u2022 Found 0 possible trades\n\u2022 Planning 0 buys\n\u2022 Mode: paper trading\n\n*Sell:* nothing planned today.\n\n*Note*\n\u2022 early close today: no new entries"
+    ]
+   ],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  },
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 1 possible trade\n\u2022 Planning 1 buy\n\u2022 Mode: dry run, no real orders\n\n*Buy: possible trades today*\n```\nStock  Win chance  Decision               Reason\n------------------------------------------------------------------------------\nAAPL   80%         Buy (plan #1)          Uptrend, sharp dip, up 40% in 6 mo\n```\n\n*Sell:* nothing planned today."
+    ]
+   ],
+   "broker": [],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 234.57984382237365,
+      "momentum": 0.3971057506851161,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 234.58, \"atr\": 3.3956, \"score\": 0.3971, \"flags\": [\"earnings date unknown (policy=flag)\"], \"rsi_min\": 2.15, \"momentum\": 0.3971, \"lower_bound\": 0.7289}",
+      "id": 1,
+      "lower_bound": 0.7289,
+      "reason": "planned",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "taken": 1,
+      "win_prob": 0.8
+     }
+    ],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  }
+ ],
+ "swing_stop_hit": [
+  {
+   "alerts": [
+    [
+     "INFO",
+     "Buy order placed: AAPL",
+     "Buying up to 147 shares of AAPL at $120.24 or less (up to $17,675.28). Stop-loss $113.44. Estimated win chance 80%."
+    ],
+    [
+     "INFO",
+     ":moneybag: Bought AAPL",
+     "\u2022 Bought 147 shares of AAPL at $120.00 each\n\u2022 Total: $17,640.00\n\u2022 Stop-loss is at $113.44"
+    ],
+    [
+     "INFO",
+     ":chart_with_downwards_trend: Sold AAPL",
+     "\u2022 Sold 147 shares of AAPL at $113.44 each\n\u2022 Bought at $120.00\n\u2022 Loss: $964.32\n\u2022 Why: the stop-loss was hit"
+    ]
+   ],
+   "broker": [
+    [
+     "verify",
+     true
+    ],
+    [
+     "account"
+    ],
+    [
+     "entry",
+     "AAPL",
+     147,
+     120.24,
+     113.44,
+     "2026-10-05-AAPL-entry"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [
+     {
+      "key": "once:sell_seen:o1",
+      "value": "1"
+     }
+    ],
+    "orders": [
+     {
+      "alpaca_id": "o2",
+      "client_order_id": "2026-10-05-AAPL-entry",
+      "created_at": "2026-10-05T09:50:00-04:00",
+      "limit_price": 120.24,
+      "qty": 147.0,
+      "side": "buy",
+      "status": "new",
+      "stop_price": 113.44,
+      "symbol": "AAPL",
+      "type": "limit",
+      "updated_at": "2026-10-05T09:50:00-04:00"
+     }
+    ],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 119.0,
+      "momentum": 0.3,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [
+     {
+      "entry_date": "2026-10-05",
+      "entry_price": 120.0,
+      "exit_date": "2026-10-05",
+      "exit_price": 113.44,
+      "exit_reason": "stop",
+      "holding_days": 0,
+      "id": 1,
+      "pnl": -964.3199999999997,
+      "r_multiple": -0.9999999999999993,
+      "shares": 147,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "unsettled": [
+     {
+      "amount": 16675.68,
+      "id": 1,
+      "settles_on": "2026-10-06"
+     }
+    ]
+   },
+   "memory": {}
+  }
+ ],
+ "swing_stop_raise_and_qty_trim": [
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":arrow_up: MSFT: stop-loss moved up",
+     "The stop-loss for your 100 shares moved up from $96.00 to $100.00. If the price falls to $100.00, the bot sells automatically. A stop-loss only ever moves up, never down."
+    ],
+    [
+     "INFO",
+     "MSFT: stop-loss resized",
+     "Some shares were sold, so the stop-loss now protects the 100 shares you still hold."
+    ]
+   ],
+   "broker": [
+    [
+     "stop",
+     "MSFT",
+     100,
+     96.0,
+     "s-MSFT"
+    ],
+    [
+     "replace",
+     "o1",
+     100.0,
+     null
+    ],
+    [
+     "replace",
+     "o1",
+     null,
+     100
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [],
+    "plans": [],
+    "positions": [
+     {
+      "days_held": 1,
+      "entry_date": "2026-10-02",
+      "entry_price": 100.0,
+      "initial_stop": 96.0,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 100,
+      "shares_initial": 100,
+      "signature": "up|low|strong|deep|near",
+      "stop": 100.0,
+      "stop_order_id": "o1",
+      "symbol": "MSFT",
+      "win_prob": 0.8
+     }
+    ],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  }
+ ],
+ "swing_tick_day": [
+  {
+   "alerts": [
+    [
+     "INFO",
+     ":sunrise: Morning plan for Mon Oct 5",
+     "\u2022 Found 1 possible trade\n\u2022 Planning 1 buy\n\u2022 Mode: paper trading\n\n*Buy: possible trades today*\n```\nStock  Win chance  Decision               Reason\n------------------------------------------------------------------------------\nAAPL   80%         Buy (plan #1)          Uptrend, sharp dip, up 40% in 6 mo\n```\n\n*Sell:* nothing planned today."
+    ],
+    [
+     "INFO",
+     "Buy order placed: AAPL",
+     "Buying up to 147 shares of AAPL at $120.24 or less (up to $17,675.28). Stop-loss $113.44. Estimated win chance 80%."
+    ],
+    [
+     "INFO",
+     "Cancelled the AAPL buy order",
+     "It hadn't filled by 11:00, so the bot cancelled it."
+    ],
+    [
+     "INFO",
+     ":bar_chart: End of day Mon Oct 5",
+     "Account value $100,000.00 (up $0.00 today), 0.0% below its peak.\nHolding: nothing. Sold today: 0.\nWarnings: none"
+    ]
+   ],
+   "broker": [
+    [
+     "verify",
+     true
+    ],
+    [
+     "account"
+    ],
+    [
+     "entry",
+     "AAPL",
+     147,
+     120.24,
+     113.44,
+     "2026-10-05-AAPL-entry"
+    ],
+    [
+     "cancel",
+     "o2"
+    ],
+    [
+     "account"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [
+     {
+      "cash": 100000.0,
+      "day": "2026-10-02",
+      "equity": 100000.0
+     },
+     {
+      "cash": 100000.0,
+      "day": "2026-10-05",
+      "equity": 100000.0
+     }
+    ],
+    "flags": [],
+    "kv": [],
+    "orders": [
+     {
+      "alpaca_id": "o2",
+      "client_order_id": "2026-10-05-AAPL-entry",
+      "created_at": "2026-10-05T09:47:00-04:00",
+      "limit_price": 120.24,
+      "qty": 147.0,
+      "side": "buy",
+      "status": "canceled",
+      "stop_price": 113.44,
+      "symbol": "AAPL",
+      "type": "limit",
+      "updated_at": "2026-10-05T11:01:00-04:00"
+     }
+    ],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 234.57984382237365,
+      "momentum": 0.3971057506851161,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [
+     {
+      "error": null,
+      "finished_at": "2026-10-05T08:35:00-04:00",
+      "id": 1,
+      "job": "premarket",
+      "started_at": "2026-10-05T08:35:00-04:00",
+      "status": "ok"
+     },
+     {
+      "error": null,
+      "finished_at": "2026-10-05T09:47:00-04:00",
+      "id": 2,
+      "job": "entries",
+      "started_at": "2026-10-05T09:47:00-04:00",
+      "status": "ok"
+     },
+     {
+      "error": null,
+      "finished_at": "2026-10-05T10:02:00-04:00",
+      "id": 3,
+      "job": "manage",
+      "started_at": "2026-10-05T10:02:00-04:00",
+      "status": "ok"
+     },
+     {
+      "error": null,
+      "finished_at": "2026-10-05T10:33:00-04:00",
+      "id": 4,
+      "job": "manage",
+      "started_at": "2026-10-05T10:33:00-04:00",
+      "status": "ok"
+     },
+     {
+      "error": null,
+      "finished_at": "2026-10-05T11:01:00-04:00",
+      "id": 5,
+      "job": "manage",
+      "started_at": "2026-10-05T11:01:00-04:00",
+      "status": "ok"
+     },
+     {
+      "error": null,
+      "finished_at": "2026-10-05T16:16:00-04:00",
+      "id": 6,
+      "job": "eod",
+      "started_at": "2026-10-05T16:16:00-04:00",
+      "status": "ok"
+     },
+     {
+      "error": null,
+      "finished_at": "2026-10-05T17:55:00-04:00",
+      "id": 7,
+      "job": "usage_watch",
+      "started_at": "2026-10-05T17:55:00-04:00",
+      "status": "ok"
+     }
+    ],
+    "shadow_trades": [],
+    "signals": [
+     {
+      "day": "2026-10-05",
+      "features": "{\"strategy\": \"trend_pullback\", \"close\": 234.58, \"atr\": 3.3956, \"score\": 0.3971, \"flags\": [\"earnings date unknown (policy=flag)\"], \"rsi_min\": 2.15, \"momentum\": 0.3971, \"lower_bound\": 0.7289}",
+      "id": 1,
+      "lower_bound": 0.7289,
+      "reason": "planned",
+      "sample_size": 0,
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "taken": 1,
+      "win_prob": 0.8
+     }
+    ],
+    "slots": [
+     {
+      "job": "entries",
+      "slot": "2026-10-05T09:45"
+     },
+     {
+      "job": "eod",
+      "slot": "2026-10-05T16:15"
+     },
+     {
+      "job": "manage",
+      "slot": "2026-10-05T10:00"
+     },
+     {
+      "job": "manage",
+      "slot": "2026-10-05T10:30"
+     },
+     {
+      "job": "manage",
+      "slot": "2026-10-05T11:00"
+     },
+     {
+      "job": "premarket",
+      "slot": "2026-10-05T08:30"
+     },
+     {
+      "job": "usage_watch",
+      "slot": "2026-10-05T17:52"
+     }
+    ],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {
+    "packs/daily-2026-10-05.md": "# Daily pack 2026-10-05\nLegend: exits STOP initial stop, TRAIL trailing/breakeven stop, TIME time stop, TREND close < SMA50, TGT partial at +2R. Signatures TP-<SPY trend><SPY vol><trend strength><pullback depth><EMA distance>.\n\n## Account\nequity 100,000 | day P&L +0.00 (0.0%) | drawdown 0.0%\n\n## Flags\nkill_switch=no paused=no\n",
+    "state.json": "{\n \"as_of\": \"2026-10-05T16:16:00-04:00\",\n \"mode\": \"paper\",\n \"equity\": 100000.0,\n \"peak_equity\": 100000.0,\n \"drawdown_pct\": 0.0,\n \"flags\": {\n  \"kill_switch\": false,\n  \"paused\": false\n },\n \"open_positions\": [],\n \"last_runs\": {\n  \"premarket\": \"ok\",\n  \"entries\": \"ok\",\n  \"manage\": \"ok\",\n  \"eod\": \"running\"\n },\n \"strategy_version\": \"trend-pullback-v1\"\n}\n"
+   }
+  }
+ ],
+ "swing_unfilled_entry_cancelled": [
+  {
+   "alerts": [
+    [
+     "INFO",
+     "Buy order placed: AAPL",
+     "Buying up to 147 shares of AAPL at $120.24 or less (up to $17,675.28). Stop-loss $113.44. Estimated win chance 80%."
+    ],
+    [
+     "INFO",
+     "Cancelled the AAPL buy order",
+     "It hadn't filled by 11:00, so the bot cancelled it."
+    ]
+   ],
+   "broker": [
+    [
+     "verify",
+     true
+    ],
+    [
+     "account"
+    ],
+    [
+     "entry",
+     "AAPL",
+     147,
+     120.24,
+     113.44,
+     "2026-10-05-AAPL-entry"
+    ],
+    [
+     "cancel",
+     "o2"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [
+     {
+      "alpaca_id": "o2",
+      "client_order_id": "2026-10-05-AAPL-entry",
+      "created_at": "2026-10-05T09:50:00-04:00",
+      "limit_price": 120.24,
+      "qty": 147.0,
+      "side": "buy",
+      "status": "canceled",
+      "stop_price": 113.44,
+      "symbol": "AAPL",
+      "type": "limit",
+      "updated_at": "2026-10-05T11:05:00-04:00"
+     }
+    ],
+    "plans": [
+     {
+      "atr": 3.395553400318191,
+      "day": "2026-10-05",
+      "last_close": 119.0,
+      "momentum": 0.3,
+      "rank": 1,
+      "sector": "Information Technology",
+      "signature": "up|low|strong|deep|near",
+      "symbol": "AAPL",
+      "win_prob": 0.8
+     }
+    ],
+    "positions": [],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  }
+ ],
+ "swing_unknown_and_unprotected": [
+  {
+   "alerts": [
+    [
+     "CRITICAL",
+     "MSFT: position the bot didn't open",
+     "Found 10 shares of MSFT that the bot didn't buy. It's adding a stop-loss to protect it; please check it by hand."
+    ],
+    [
+     "CRITICAL",
+     "SPY: position the bot didn't open",
+     "Found 5 shares of SPY that the bot didn't buy. It's adding a stop-loss to protect it; please check it by hand."
+    ],
+    [
+     "CRITICAL",
+     "MSFT had no stop-loss",
+     "Placed a stop-loss at $95.00 for 10 shares."
+    ],
+    [
+     "CRITICAL",
+     "SPY had no stop-loss",
+     "The price ($94.00) was already below the stop-loss ($95.00), so the bot sold 5 shares right away."
+    ],
+    [
+     "CRITICAL",
+     "SPY had no stop-loss",
+     "The price ($94.00) was already below the stop-loss ($95.00), so the bot sold 5 shares right away."
+    ],
+    [
+     "CRITICAL",
+     "MSFT: share count doesn't match",
+     "The broker shows 30 shares but the bot expected 10. Please check this position by hand."
+    ],
+    [
+     "CRITICAL",
+     "MSFT had no stop-loss",
+     "Placed a stop-loss at $95.00 for 20 shares."
+    ],
+    [
+     "CRITICAL",
+     "SPY had no stop-loss",
+     "The price ($94.00) was already below the stop-loss ($95.00), so the bot sold 5 shares right away."
+    ]
+   ],
+   "broker": [
+    [
+     "stop",
+     "MSFT",
+     10,
+     95.0,
+     "2026-10-05-MSFT-protect-1000"
+    ],
+    [
+     "sell",
+     "SPY",
+     5,
+     "2026-10-05-SPY-protect-1000"
+    ],
+    [
+     "sell",
+     "SPY",
+     5,
+     "2026-10-05-SPY-protect-1030"
+    ],
+    [
+     "stop",
+     "MSFT",
+     20,
+     95.0,
+     "2026-10-05-MSFT-protect-1100"
+    ],
+    [
+     "sell",
+     "SPY",
+     5,
+     "2026-10-05-SPY-protect-1100"
+    ]
+   ],
+   "journal": {
+    "alerts": [],
+    "equity": [],
+    "flags": [],
+    "kv": [],
+    "orders": [
+     {
+      "alpaca_id": "o1",
+      "client_order_id": "2026-10-05-MSFT-protect-1000",
+      "created_at": "2026-10-05T10:00:00-04:00",
+      "limit_price": null,
+      "qty": 10.0,
+      "side": "sell",
+      "status": "new",
+      "stop_price": 95.0,
+      "symbol": "MSFT",
+      "type": "stop",
+      "updated_at": "2026-10-05T10:00:00-04:00"
+     },
+     {
+      "alpaca_id": "o4",
+      "client_order_id": "2026-10-05-MSFT-protect-1100",
+      "created_at": "2026-10-05T11:00:00-04:00",
+      "limit_price": null,
+      "qty": 20.0,
+      "side": "sell",
+      "status": "new",
+      "stop_price": 95.0,
+      "symbol": "MSFT",
+      "type": "stop",
+      "updated_at": "2026-10-05T11:00:00-04:00"
+     },
+     {
+      "alpaca_id": "o2",
+      "client_order_id": "2026-10-05-SPY-protect-1000",
+      "created_at": "2026-10-05T10:00:00-04:00",
+      "limit_price": null,
+      "qty": 5.0,
+      "side": "sell",
+      "status": "new",
+      "stop_price": 95.0,
+      "symbol": "SPY",
+      "type": "stop",
+      "updated_at": "2026-10-05T10:00:00-04:00"
+     },
+     {
+      "alpaca_id": "o3",
+      "client_order_id": "2026-10-05-SPY-protect-1030",
+      "created_at": "2026-10-05T10:30:00-04:00",
+      "limit_price": null,
+      "qty": 5.0,
+      "side": "sell",
+      "status": "new",
+      "stop_price": 95.0,
+      "symbol": "SPY",
+      "type": "stop",
+      "updated_at": "2026-10-05T10:30:00-04:00"
+     },
+     {
+      "alpaca_id": "o5",
+      "client_order_id": "2026-10-05-SPY-protect-1100",
+      "created_at": "2026-10-05T11:00:00-04:00",
+      "limit_price": null,
+      "qty": 5.0,
+      "side": "sell",
+      "status": "new",
+      "stop_price": 95.0,
+      "symbol": "SPY",
+      "type": "stop",
+      "updated_at": "2026-10-05T11:00:00-04:00"
+     }
+    ],
+    "plans": [],
+    "positions": [
+     {
+      "days_held": 0,
+      "entry_date": "2026-10-05",
+      "entry_price": 100.0,
+      "initial_stop": 95.0,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Information Technology",
+      "shares": 10,
+      "shares_initial": 10,
+      "signature": "unknown",
+      "stop": 95.0,
+      "stop_order_id": "o1",
+      "symbol": "MSFT",
+      "win_prob": null
+     },
+     {
+      "days_held": 0,
+      "entry_date": "2026-10-05",
+      "entry_price": 100.0,
+      "initial_stop": 95.0,
+      "partial_taken": 0,
+      "pending_exit": null,
+      "realized_proceeds": 0.0,
+      "sector": "Broad Market",
+      "shares": 5,
+      "shares_initial": 5,
+      "signature": "unknown",
+      "stop": 95.0,
+      "stop_order_id": null,
+      "symbol": "SPY",
+      "win_prob": null
+     }
+    ],
+    "runs": [],
+    "signals": [],
+    "slots": [],
+    "trades": [],
+    "unsettled": []
+   },
+   "memory": {}
+  }
+ ]
+}

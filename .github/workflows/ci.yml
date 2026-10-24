@@ -1,0 +1,42 @@
+name: CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --frozen
+      - run: uv run ruff check . && uv run ruff format --check .
+      - run: uv run pytest -q
+  windows:
+    # The bot can run on a Windows laptop (BOT_HOST=windows): unit tests plus a smoke test
+    # of run_job.cmd and the Task Scheduler install/uninstall. Dummy keys, no broker calls.
+    runs-on: windows-latest
+    env:
+      PYTHONUTF8: "1"  # README tells Windows users to set this once (setx PYTHONUTF8 1)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --frozen
+      - run: uv run pytest -q
+      - name: Smoke-test the Windows scripts
+        shell: pwsh
+        env:
+          ALPACA_API_KEY: dummy
+          ALPACA_SECRET_KEY: dummy
+          BOT_HOST: windows
+        run: |
+          cmd /c scripts\run_job.cmd status
+          $rc = $LASTEXITCODE
+          Get-Content logs\status.log
+          if ($rc -ne 0) { exit $rc }
+          uv run python -m bot.host install
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Get-ScheduledTask -TaskPath "\StockTradingBot\" -TaskName tick | Format-List TaskName, State
+          uv run python -m bot.host uninstall
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

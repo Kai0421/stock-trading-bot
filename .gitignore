@@ -1,0 +1,32 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Bot state
+data/
+*.db
+*.sqlite
+logs/
+reports/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Local agent config
+AGENTS.local.md
+.devin/config.local.json
+
+# OS
+.DS_Store
+
+# Claude Code local settings
+.claude/

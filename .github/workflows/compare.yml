@@ -1,0 +1,111 @@
+# Manually triggered strategy comparison, optionally followed by the walk-forward
+# generations of bot.evolve. Same key handling as backtest.yml. Writes only reports
+# (uploaded as an artifact), never the live gate's evidence file.
+name: Compare strategies
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "swing (daily-bar strategies) or intraday (5-minute strategies, docs/17)"
+        type: choice
+        options: [swing, intraday]
+        default: swing
+      start:
+        description: Start date (YYYY-MM-DD)
+        default: "2016-01-01"
+      end:
+        description: End date (YYYY-MM-DD)
+        default: "2026-09-30"
+      gate_mode:
+        description: "Gate rule to test: win_rate or expectancy (empty = repository variable GATE_MODE)"
+        default: ""
+      strategies:
+        description: Comma-separated strategy names (empty = STRATEGY_CANDIDATES, else all)
+        default: ""
+      resume_after_days:
+        description: "Backtest only: restart N trading days after a 10% drawdown pause, at half size (0 = never, as live)"
+        default: "20"
+      live_sizing:
+        description: Size trades like the live bot (repository variables RISK_PER_TRADE, MAX_POSITION_PCT, MAX_OPEN_POSITIONS)
+        type: boolean
+        default: true
+      evolve:
+        description: Also run the walk-forward generations for these strategies (slower, docs/15)
+        type: boolean
+        default: false
+      first_test_year:
+        description: "Evolve only: first unseen test year (empty = start year + 3)"
+        default: ""
+      environment:
+        description: GitHub environment holding the Alpaca keys
+        default: ALPACA_API_KEY
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    timeout-minutes: 180
+    env:
+      ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY || vars.ALPACA_API_KEY }}
+      ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+      PAPER: "true"
+      DRY_RUN: "true"
+      # Repository variables: the traded strategy and the candidates to suggest from.
+      STRATEGY: ${{ vars.STRATEGY }}
+      STRATEGY_CANDIDATES: ${{ vars.STRATEGY_CANDIDATES }}
+      GATE_MODE: ${{ inputs.gate_mode || vars.GATE_MODE }}  # win_rate (default) | expectancy
+      # Live sizing (repository variables) unless unticked; empty = the documented defaults.
+      RISK_PER_TRADE: ${{ inputs.live_sizing && vars.RISK_PER_TRADE || '' }}
+      MAX_POSITION_PCT: ${{ inputs.live_sizing && vars.MAX_POSITION_PCT || '' }}
+      MAX_OPEN_POSITIONS: ${{ inputs.live_sizing && vars.MAX_OPEN_POSITIONS || '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --frozen
+      - name: Compare
+        if: ${{ inputs.mode != 'intraday' }}
+        env:  # inputs go through env, never straight into the script (no injection)
+          START: ${{ inputs.start }}
+          END: ${{ inputs.end }}
+          STRATEGIES: ${{ inputs.strategies }}
+          RESUME_AFTER_DAYS: ${{ inputs.resume_after_days }}
+        run: |
+          args=(--start "$START" --end "$END" --resume-after-days "${RESUME_AFTER_DAYS:-0}")
+          if [[ -n "$STRATEGIES" ]]; then args+=(--strategies "$STRATEGIES"); fi
+          uv run python -m bot.compare "${args[@]}"
+      - name: Intraday backtest
+        if: ${{ inputs.mode == 'intraday' }}
+        env:
+          START: ${{ inputs.start }}
+          END: ${{ inputs.end }}
+          STRATEGIES: ${{ inputs.strategies }}
+          RESUME_AFTER_DAYS: ${{ inputs.resume_after_days }}
+        run: |
+          args=(--start "$START" --end "$END" --resume-after-days "${RESUME_AFTER_DAYS:-0}")
+          if [[ -n "$STRATEGIES" ]]; then args+=(--strategies "$STRATEGIES"); fi
+          uv run python -m bot.intraday.backtest "${args[@]}"
+      - name: Evolve
+        if: ${{ inputs.evolve && inputs.mode != 'intraday' }}
+        env:
+          START: ${{ inputs.start }}
+          END: ${{ inputs.end }}
+          STRATEGIES: ${{ inputs.strategies }}
+          FIRST_TEST_YEAR: ${{ inputs.first_test_year }}
+        run: |
+          args=(--start "$START" --end "$END")
+          if [[ -n "$STRATEGIES" ]]; then args+=(--strategies "$STRATEGIES"); fi
+          if [[ -n "$FIRST_TEST_YEAR" ]]; then args+=(--first-test-year "$FIRST_TEST_YEAR"); fi
+          uv run python -m bot.evolve "${args[@]}"
+      - name: Show report
+        run: cat memory/backtests/compare-*.md memory/backtests/compare-*.equity.csv memory/backtests/evolve-*.md memory/backtests/intraday-*.md 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: compare-${{ github.run_id }}
+          path: |
+            memory/backtests/compare-*.md
+            memory/backtests/compare-*.equity.csv
+            memory/backtests/evolve-*.md
+            memory/backtests/intraday-*.md
+            memory/evidence/*.json
+          if-no-files-found: warn

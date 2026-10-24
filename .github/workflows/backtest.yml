@@ -1,0 +1,80 @@
+# Manually triggered backtest. Alpaca keys come from the GitHub environment (default
+# "ALPACA_API_KEY"): ALPACA_API_KEY may be a secret or a variable, ALPACA_SECRET_KEY must be a
+# secret. Secrets are decrypted only inside this runner; the job never prints them.
+# Results are uploaded as an artifact (report + evidence file). With "commit_evidence" the run
+# also commits the report and memory/evidence/<strategy>.json to the branch it ran on.
+name: Backtest
+on:
+  workflow_dispatch:
+    inputs:
+      start:
+        description: Start date (YYYY-MM-DD)
+        default: "2016-01-01"
+      end:
+        description: End date (YYYY-MM-DD)
+        default: "2026-09-30"
+      strategy:
+        description: Strategy to backtest (empty = trend_pullback)
+        default: ""
+      stability:
+        description: Run the ±20% parameter stability check (slower)
+        type: boolean
+        default: true
+      commit_evidence:
+        description: Commit the report and memory/evidence/<strategy>.json to this branch
+        type: boolean
+        default: false
+      environment:
+        description: GitHub environment holding the Alpaca keys
+        default: ALPACA_API_KEY
+permissions:
+  contents: write  # only used by the commit_evidence step
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    timeout-minutes: 60
+    env:
+      ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY || vars.ALPACA_API_KEY }}
+      ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+      PAPER: "true"
+      DRY_RUN: "true"
+      GATE_MODE: ${{ vars.GATE_MODE }}  # win_rate (default) | expectancy
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --frozen
+      - name: Backtest
+        env:  # inputs go through env, never straight into the script (no injection)
+          START: ${{ inputs.start }}
+          END: ${{ inputs.end }}
+          STABILITY: ${{ inputs.stability }}
+          STRATEGY_NAME: ${{ inputs.strategy }}
+        run: |
+          args=(--start "$START" --end "$END")
+          if [[ "$STABILITY" == "true" ]]; then args+=(--stability); fi
+          if [[ -n "$STRATEGY_NAME" ]]; then args+=(--strategy "$STRATEGY_NAME"); fi
+          name="${STRATEGY_NAME:-trend_pullback}"
+          if [[ ! "$name" =~ ^[a-z0-9_]+$ ]]; then echo "bad strategy name"; exit 2; fi
+          args+=(--evidence-out "memory/evidence/$name.json")
+          uv run python -m bot.backtest "${args[@]}" || code=$?
+          echo "exit code ${code:-0} (1 = strategy not accepted, 2 = configuration error)"
+          [[ "${code:-0}" -le 1 ]]
+      - uses: actions/upload-artifact@v4
+        with:
+          name: backtest-${{ github.run_id }}
+          path: |
+            memory/backtests/
+            memory/evidence/
+          if-no-files-found: warn
+      - name: Commit report and evidence
+        if: inputs.commit_evidence
+        env:
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          git config user.name "stocktradingbot[bot]"
+          git config user.email "stocktradingbot@users.noreply.github.com"
+          git add memory/evidence/ memory/backtests/
+          if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
+          git commit -q -m "Backtest evidence: run ${GITHUB_RUN_ID}"
+          git push -q origin "HEAD:$BRANCH"

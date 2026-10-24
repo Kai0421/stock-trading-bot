@@ -1,0 +1,170 @@
+{
+ "as_of": "2026-09-30",
+ "backtest_id": "20261005-294ecaa5",
+ "signatures": {
+  "confluence_reversion|high|v2|far": {
+   "mean_r": 0.1196,
+   "n": 37,
+   "sd_r": 0.338417,
+   "wins": 28
+  },
+  "confluence_reversion|high|v2|mid": {
+   "mean_r": -0.033361,
+   "n": 63,
+   "sd_r": 0.467381,
+   "wins": 36
+  },
+  "confluence_reversion|high|v2|near": {
+   "mean_r": 0.120802,
+   "n": 51,
+   "sd_r": 0.303342,
+   "wins": 36
+  },
+  "confluence_reversion|high|v3|far": {
+   "mean_r": 0.105761,
+   "n": 13,
+   "sd_r": 0.273279,
+   "wins": 11
+  },
+  "confluence_reversion|high|v3|mid": {
+   "mean_r": 0.00812,
+   "n": 32,
+   "sd_r": 0.436788,
+   "wins": 20
+  },
+  "confluence_reversion|high|v3|near": {
+   "mean_r": 0.138408,
+   "n": 28,
+   "sd_r": 0.291093,
+   "wins": 21
+  },
+  "confluence_reversion|high|v4|far": {
+   "mean_r": -0.379214,
+   "n": 2,
+   "sd_r": 0.88621,
+   "wins": 1
+  },
+  "confluence_reversion|high|v4|mid": {
+   "mean_r": 0.089268,
+   "n": 9,
+   "sd_r": 0.265065,
+   "wins": 7
+  },
+  "confluence_reversion|high|v4|near": {
+   "mean_r": 0.009075,
+   "n": 7,
+   "sd_r": 0.470732,
+   "wins": 5
+  },
+  "confluence_reversion|low|v2|far": {
+   "mean_r": -0.019559,
+   "n": 719,
+   "sd_r": 0.502766,
+   "wins": 437
+  },
+  "confluence_reversion|low|v2|mid": {
+   "mean_r": 0.004285,
+   "n": 1568,
+   "sd_r": 0.494801,
+   "wins": 978
+  },
+  "confluence_reversion|low|v2|near": {
+   "mean_r": 0.006005,
+   "n": 850,
+   "sd_r": 0.445853,
+   "wins": 535
+  },
+  "confluence_reversion|low|v3|far": {
+   "mean_r": 0.014245,
+   "n": 284,
+   "sd_r": 0.484968,
+   "wins": 188
+  },
+  "confluence_reversion|low|v3|mid": {
+   "mean_r": 0.023404,
+   "n": 685,
+   "sd_r": 0.478676,
+   "wins": 428
+  },
+  "confluence_reversion|low|v3|near": {
+   "mean_r": 0.027654,
+   "n": 430,
+   "sd_r": 0.455456,
+   "wins": 268
+  },
+  "confluence_reversion|low|v4|far": {
+   "mean_r": 0.011909,
+   "n": 31,
+   "sd_r": 0.424045,
+   "wins": 20
+  },
+  "confluence_reversion|low|v4|mid": {
+   "mean_r": 0.109765,
+   "n": 99,
+   "sd_r": 0.44114,
+   "wins": 65
+  },
+  "confluence_reversion|low|v4|near": {
+   "mean_r": 0.127051,
+   "n": 77,
+   "sd_r": 0.43079,
+   "wins": 56
+  },
+  "confluence_reversion|mid|v2|far": {
+   "mean_r": 0.056605,
+   "n": 633,
+   "sd_r": 0.441413,
+   "wins": 447
+  },
+  "confluence_reversion|mid|v2|mid": {
+   "mean_r": 0.024654,
+   "n": 1093,
+   "sd_r": 0.438066,
+   "wins": 730
+  },
+  "confluence_reversion|mid|v2|near": {
+   "mean_r": -0.00374,
+   "n": 696,
+   "sd_r": 0.449855,
+   "wins": 444
+  },
+  "confluence_reversion|mid|v3|far": {
+   "mean_r": 0.117166,
+   "n": 252,
+   "sd_r": 0.426231,
+   "wins": 180
+  },
+  "confluence_reversion|mid|v3|mid": {
+   "mean_r": 0.069361,
+   "n": 485,
+   "sd_r": 0.444944,
+   "wins": 327
+  },
+  "confluence_reversion|mid|v3|near": {
+   "mean_r": -0.023409,
+   "n": 345,
+   "sd_r": 0.447349,
+   "wins": 217
+  },
+  "confluence_reversion|mid|v4|far": {
+   "mean_r": -0.005454,
+   "n": 21,
+   "sd_r": 0.481768,
+   "wins": 14
+  },
+  "confluence_reversion|mid|v4|mid": {
+   "mean_r": 0.055437,
+   "n": 90,
+   "sd_r": 0.484884,
+   "wins": 60
+  },
+  "confluence_reversion|mid|v4|near": {
+   "mean_r": -5.2e-05,
+   "n": 79,
+   "sd_r": 0.505135,
+   "wins": 50
+  }
+ },
+ "strategy": "confluence_reversion",
+ "verdict": "REJECTED"
+}

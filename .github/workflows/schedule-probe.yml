@@ -1,0 +1,14 @@
+# TEMPORARY diagnostic (2026-10-05): does GitHub fire *any* cron schedule in this repo?
+# The Engine workflow has never received a schedule event. Remove once answered.
+name: Schedule probe
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+permissions: {}
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - run: echo "probe fired by ${{ github.event_name }} at $(date -u +%H:%M:%S)Z"

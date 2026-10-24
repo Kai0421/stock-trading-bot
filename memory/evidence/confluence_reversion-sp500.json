@@ -1,0 +1,171 @@
+{
+ "as_of": "2026-09-30",
+ "backtest_id": "20261008-1b716cc0-sp500",
+ "signatures": {
+  "confluence_reversion|high|v2|far": {
+   "mean_r": 0.1802,
+   "n": 34,
+   "sd_r": 0.247487,
+   "wins": 30
+  },
+  "confluence_reversion|high|v2|mid": {
+   "mean_r": 0.262966,
+   "n": 71,
+   "sd_r": 0.229619,
+   "wins": 65
+  },
+  "confluence_reversion|high|v2|near": {
+   "mean_r": 0.148649,
+   "n": 81,
+   "sd_r": 0.21901,
+   "wins": 61
+  },
+  "confluence_reversion|high|v3|far": {
+   "mean_r": 0.213449,
+   "n": 18,
+   "sd_r": 0.17914,
+   "wins": 16
+  },
+  "confluence_reversion|high|v3|mid": {
+   "mean_r": 0.204362,
+   "n": 39,
+   "sd_r": 0.245509,
+   "wins": 30
+  },
+  "confluence_reversion|high|v3|near": {
+   "mean_r": 0.182751,
+   "n": 57,
+   "sd_r": 0.24711,
+   "wins": 46
+  },
+  "confluence_reversion|high|v4|far": {
+   "mean_r": 0.312557,
+   "n": 2,
+   "sd_r": 0.092102,
+   "wins": 2
+  },
+  "confluence_reversion|high|v4|mid": {
+   "mean_r": 0.113122,
+   "n": 9,
+   "sd_r": 0.492879,
+   "wins": 7
+  },
+  "confluence_reversion|high|v4|near": {
+   "mean_r": 0.04455,
+   "n": 8,
+   "sd_r": 0.187305,
+   "wins": 5
+  },
+  "confluence_reversion|low|v2|far": {
+   "mean_r": -0.004207,
+   "n": 3335,
+   "sd_r": 0.473544,
+   "wins": 2079
+  },
+  "confluence_reversion|low|v2|mid": {
+   "mean_r": -0.00066,
+   "n": 5793,
+   "sd_r": 0.468197,
+   "wins": 3659
+  },
+  "confluence_reversion|low|v2|near": {
+   "mean_r": 0.000181,
+   "n": 3089,
+   "sd_r": 0.449569,
+   "wins": 1941
+  },
+  "confluence_reversion|low|v3|far": {
+   "mean_r": 0.018749,
+   "n": 1277,
+   "sd_r": 0.500024,
+   "wins": 837
+  },
+  "confluence_reversion|low|v3|mid": {
+   "mean_r": 0.023669,
+   "n": 2622,
+   "sd_r": 0.468904,
+   "wins": 1666
+  },
+  "confluence_reversion|low|v3|near": {
+   "mean_r": 0.037904,
+   "n": 1644,
+   "sd_r": 0.463025,
+   "wins": 1056
+  },
+  "confluence_reversion|low|v4|far": {
+   "mean_r": 0.044691,
+   "n": 134,
+   "sd_r": 0.48284,
+   "wins": 87
+  },
+  "confluence_reversion|low|v4|mid": {
+   "mean_r": 0.050398,
+   "n": 421,
+   "sd_r": 0.474054,
+   "wins": 259
+  },
+  "confluence_reversion|low|v4|near": {
+   "mean_r": 0.040159,
+   "n": 309,
+   "sd_r": 0.451398,
+   "wins": 199
+  },
+  "confluence_reversion|mid|v2|far": {
+   "mean_r": 0.034352,
+   "n": 2943,
+   "sd_r": 0.408692,
+   "wins": 1951
+  },
+  "confluence_reversion|mid|v2|mid": {
+   "mean_r": 0.013884,
+   "n": 4405,
+   "sd_r": 0.429439,
+   "wins": 2847
+  },
+  "confluence_reversion|mid|v2|near": {
+   "mean_r": 0.017358,
+   "n": 2768,
+   "sd_r": 0.43441,
+   "wins": 1787
+  },
+  "confluence_reversion|mid|v3|far": {
+   "mean_r": 0.072367,
+   "n": 1146,
+   "sd_r": 0.426208,
+   "wins": 797
+  },
+  "confluence_reversion|mid|v3|mid": {
+   "mean_r": 0.028529,
+   "n": 2045,
+   "sd_r": 0.461746,
+   "wins": 1331
+  },
+  "confluence_reversion|mid|v3|near": {
+   "mean_r": -0.004208,
+   "n": 1439,
+   "sd_r": 0.463745,
+   "wins": 911
+  },
+  "confluence_reversion|mid|v4|far": {
+   "mean_r": 0.085823,
+   "n": 152,
+   "sd_r": 0.421344,
+   "wins": 107
+  },
+  "confluence_reversion|mid|v4|mid": {
+   "mean_r": 0.045674,
+   "n": 376,
+   "sd_r": 0.472605,
+   "wins": 242
+  },
+  "confluence_reversion|mid|v4|near": {
+   "mean_r": -0.021752,
+   "n": 294,
+   "sd_r": 0.493257,
+   "wins": 173
+  }
+ },
+ "strategy": "confluence_reversion",
+ "universe": "sp500",
+ "verdict": "ACCEPTED (stability advisory)"
+}

@@ -1,0 +1,108 @@
+# Trading engine on GitHub Actions: MANUAL RUNS ONLY.
+#
+# Since 2026-10-06 the engine runs on the Mac via launchd (scripts/install_launchd.sh).
+# GitHub's scheduled runs started 1-3 hours late and missed the premarket/entries windows,
+# so the schedule was removed. Never run a schedule here and launchd at the same time:
+# they keep separate state and could place the same order twice.
+#
+# Runs `python -m bot.engine <command>` when started from the Actions tab.
+#
+# State: data/bot.db (as a SQL dump), memory/state.json and memory/packs/ live on the
+# `bot-state` branch. Each run restores them first and commits them back afterwards.
+#
+# Secrets/variables come from the GitHub environment (default "ALPACA_API_KEY"):
+#   secrets: ALPACA_API_KEY, ALPACA_SECRET_KEY, SLACK_WEBHOOK_URL, SLACK_BOT_TOKEN,
+#            CLAUDE_ROUTINE_DAILY_URL/_TOKEN, CLAUDE_ROUTINE_WEEKLY_URL/_TOKEN
+#   variables: DRY_RUN (default "true"), RISK_PER_TRADE, MAX_POSITION_PCT, MAX_OPEN_POSITIONS,
+#              EARNINGS_POLICY, SLACK_CHANNEL, GATE_MODE, STRATEGY (default trend_pullback),
+#              PAPER_TRIAL (default "false"; owner's paper trial, memory/decisions.md 2026-10-05)
+name: Engine
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        description: Engine command (tick runs whatever is due now)
+        type: choice
+        default: tick
+        options: [tick, status, premarket, entries, manage, eod, usage_watch, review, weekly_report, weekly_review, resume]
+      environment:
+        description: GitHub environment holding the secrets
+        default: ALPACA_API_KEY
+permissions:
+  contents: write  # push the bot-state branch
+concurrency:
+  group: trading-engine
+  cancel-in-progress: false  # never interrupt a job mid-way; queue instead
+jobs:
+  engine:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment || 'ALPACA_API_KEY' }}
+    timeout-minutes: 20
+    env:
+      PAPER: "true"
+      DRY_RUN: ${{ vars.DRY_RUN || 'true' }}
+      ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
+      ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL || '#trading-bot' }}
+      CLAUDE_ROUTINE_DAILY_URL: ${{ secrets.CLAUDE_ROUTINE_DAILY_URL }}
+      CLAUDE_ROUTINE_DAILY_TOKEN: ${{ secrets.CLAUDE_ROUTINE_DAILY_TOKEN }}
+      CLAUDE_ROUTINE_WEEKLY_URL: ${{ secrets.CLAUDE_ROUTINE_WEEKLY_URL }}
+      CLAUDE_ROUTINE_WEEKLY_TOKEN: ${{ secrets.CLAUDE_ROUTINE_WEEKLY_TOKEN }}
+      RISK_PER_TRADE: ${{ vars.RISK_PER_TRADE }}
+      MAX_POSITION_PCT: ${{ vars.MAX_POSITION_PCT }}
+      MAX_OPEN_POSITIONS: ${{ vars.MAX_OPEN_POSITIONS }}
+      EARNINGS_POLICY: ${{ vars.EARNINGS_POLICY }}
+      GATE_MODE: ${{ vars.GATE_MODE }}  # win_rate (default) | expectancy
+      STRATEGY: ${{ vars.STRATEGY }}  # empty = trend_pullback
+      UNIVERSE: ${{ vars.UNIVERSE }}  # empty = sp100 | sp500
+      PAPER_TRIAL: ${{ vars.PAPER_TRIAL }}  # empty = false
+      COMMAND: ${{ inputs.command || 'tick' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --frozen
+      - name: Restore state from the bot-state branch
+        run: |
+          git config user.name "stocktradingbot[bot]"
+          git config user.email "stocktradingbot@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin bot-state >/dev/null; then
+            git fetch origin bot-state:bot-state
+            git worktree add state bot-state
+          else
+            git worktree add --orphan -b bot-state state
+          fi
+          uv run python -m bot.state_store restore --sql state/bot.sql --db data/bot.db
+          mkdir -p memory/packs
+          if [ -d state/memory/packs ]; then cp -R state/memory/packs/. memory/packs/; fi
+          if [ -f state/memory/state.json ]; then cp state/memory/state.json memory/state.json; fi
+      - name: Run engine
+        run: |
+          echo "command=$COMMAND dry_run=$DRY_RUN"
+          uv run python -m bot.engine "$COMMAND" || echo "ENGINE_EXIT=$?" >> "$GITHUB_ENV"
+      - name: Save state to the bot-state branch
+        if: always()
+        run: |
+          uv run python -m bot.state_store dump --db data/bot.db --sql state/bot.sql
+          mkdir -p state/memory/packs
+          if [ -d memory/packs ]; then cp -R memory/packs/. state/memory/packs/; fi
+          if [ -f memory/state.json ]; then cp memory/state.json state/memory/state.json; fi
+          cd state
+          git add -A
+          if git diff --cached --quiet; then echo "state unchanged"; exit 0; fi
+          git commit -q -m "state: run ${GITHUB_RUN_ID} (${COMMAND})"
+          git push -q origin bot-state
+      - name: Upload weekly report
+        if: always() && hashFiles('reports/**') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-report-${{ github.run_id }}
+          path: reports/
+      - name: Fail if the engine command failed
+        if: env.ENGINE_EXIT != ''
+        run: exit "$ENGINE_EXIT"

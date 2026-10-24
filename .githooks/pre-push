@@ -1,0 +1,21 @@
+#!/bin/sh
+# Refuse any push to, or delete of, the main branch. Work goes on a feature branch and merges
+# through a pull request (gh pr merge). Local safety net only: GitHub's own branch protection
+# needs a paid plan for private repos. Turn on with: git config core.hooksPath .githooks
+# (one time per clone; worktrees share it).
+
+zero=0000000000000000000000000000000000000000
+while read -r local_ref local_sha remote_ref remote_sha; do
+    case "$remote_ref" in
+        refs/heads/main|refs/heads/master)
+            if [ "$local_sha" = "$zero" ]; then
+                echo "BLOCKED: deleting '$remote_ref' is not allowed." >&2
+            else
+                echo "BLOCKED: pushing straight to '$remote_ref' is not allowed." >&2
+                echo "Push a feature branch and merge it with a pull request instead." >&2
+            fi
+            exit 1
+            ;;
+    esac
+done
+exit 0

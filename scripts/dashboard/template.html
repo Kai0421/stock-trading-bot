@@ -1,0 +1,355 @@
+<title>Trading Bot Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+/* Layout: status strip, KPI grid, then full-width sections in reading order: money, positions, trades, decisions, orders. */
+:root {
+  --bg: #f6f7f9; --panel: #ffffff; --fg: #12161c; --muted: #5a6370; --faint: #8a93a0;
+  --line: #e1e5ea; --grid: #edf0f3; --chip: #eef1f5;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a;
+  --good: #0f7b45; --good-bg: #e3f4ea; --bad: #b42318; --bad-bg: #fde8e6; --warn: #8a5a00; --warn-bg: #fdf2d8; --info-bg: #e6effb;
+  --pos: #1f7a4d; --neg: #c2362b;
+  --font: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111418; --panel: #191d23; --fg: #eef1f5; --muted: #a3acb8; --faint: #77808c;
+  --line: #2a3038; --grid: #232830; --chip: #232830;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70;
+  --good: #5fd39a; --good-bg: #16301f; --bad: #ff8a80; --bad-bg: #3a1a17; --warn: #f2c25b; --warn-bg: #352a12; --info-bg: #182a40;
+  --pos: #5fd39a; --neg: #ff8a80; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111418; --panel: #191d23; --fg: #eef1f5; --muted: #a3acb8; --faint: #77808c;
+  --line: #2a3038; --grid: #232830; --chip: #232830;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70;
+  --good: #5fd39a; --good-bg: #16301f; --bad: #ff8a80; --bad-bg: #3a1a17; --warn: #f2c25b; --warn-bg: #352a12; --info-bg: #182a40;
+  --pos: #5fd39a; --neg: #ff8a80; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 14px; line-height: 1.45 }
+.wrap { max-width: 1240px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 48px; display: flex; flex-direction: column; gap: 20px }
+header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 10px 24px }
+h1 { font-size: 26px; margin: 0; letter-spacing: -0.01em }
+.sub { color: var(--muted); margin: 4px 0 0; max-width: 72ch }
+.stamp { font: 12px var(--mono); color: var(--muted); text-align: right }
+.stamp b { color: var(--fg); font-weight: 500 }
+.live { color: var(--good); font-weight: 600 } .lnote { color: var(--warn) }
+.strip { display: flex; flex-wrap: wrap; gap: 8px }
+.tag { font-size: 12.5px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--chip); color: var(--fg) }
+.tag.ok { background: var(--good-bg); color: var(--good) } .tag.bad { background: var(--bad-bg); color: var(--bad) }
+.tag.warn { background: var(--warn-bg); color: var(--warn) } .tag.info { background: var(--info-bg); color: var(--s1) }
+.tag span { font-weight: 400; color: inherit; opacity: .8 }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; min-width: 0 }
+.kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden }
+@media (max-width: 900px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+.kpi { background: var(--panel); padding: 12px 14px }
+.kpi .k { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600 }
+.kpi .v { font: 500 21px var(--mono); margin-top: 2px; font-variant-numeric: tabular-nums }
+.kpi .d { font-size: 12px; color: var(--muted); font-family: var(--mono) }
+.pos { color: var(--pos) } .neg { color: var(--neg) }
+h2 { font-size: 16px; margin: 0 0 2px } .h2sub { color: var(--muted); font-size: 13px; margin: 0 0 12px; max-width: 80ch }
+.chartbox { position: relative; height: 300px } .chartbox.sm { height: 200px }
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px } @media (max-width: 1000px) { .two { grid-template-columns: minmax(0, 1fr) } }
+.scroll { overflow-x: auto } .tbl-wrap { max-height: 440px; overflow: auto }
+table { border-collapse: collapse; width: 100%; font-size: 13px }
+th, td { vertical-align: middle; padding: 7px 10px; text-align: right; border-bottom: 1px solid var(--grid); white-space: nowrap; font-variant-numeric: tabular-nums }
+th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 600; position: sticky; top: 0; background: var(--panel) }
+th:first-child, td:first-child { text-align: left } td.l, th.l { text-align: left }
+td.m { font-family: var(--mono) } td.reason { white-space: normal; min-width: 220px; text-align: left }
+.empty { border: 1px dashed var(--line); border-radius: 8px; padding: 22px 18px; color: var(--muted); text-align: center; font-size: 13.5px }
+.empty b { color: var(--fg); display: block; font-size: 14px; margin-bottom: 2px }
+.meter { display: flex; flex-direction: column; gap: 14px }
+.mrow .top { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px } .mrow .top b { font-family: var(--mono); font-weight: 500 }
+.track { position: relative; height: 10px; border-radius: 5px; background: var(--grid); overflow: visible }
+.fill { height: 100%; border-radius: 5px; background: var(--s1); min-width: 2px }
+.goal { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--fg) }
+.mrow .cap { font-size: 12px; color: var(--muted); margin-top: 4px }
+.yes { color: var(--good); font-weight: 600 } .no { color: var(--muted) }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); margin-bottom: 8px }
+.legend span::before { content: ""; display: inline-block; width: 14px; height: 3px; border-radius: 2px; background: var(--c); margin-right: 6px; vertical-align: middle }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden }
+.seg button { font: 500 12px var(--font); padding: 5px 10px; background: var(--panel); color: var(--muted); border: 0; cursor: pointer }
+.seg button[aria-pressed="true"] { background: var(--chip); color: var(--fg) }
+.seg button:focus-visible { outline: 2px solid var(--s1); outline-offset: -2px }
+.headrow { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 10px }
+.note { font-size: 12.5px; color: var(--muted); max-width: 95ch } .note b { color: var(--fg) } .note code { font-family: var(--mono); font-size: 12px; background: var(--chip); padding: 1px 5px; border-radius: 4px }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Trading Bot Dashboard</h1>
+      <p class="sub">How the bot's own paper trades are doing: account value, open positions, closed trades and the decisions behind them. Data comes from the Alpaca paper account and the bot's records on your Mac.</p>
+    </div>
+    <div class="stamp" id="stamp"></div>
+  </header>
+
+  <div class="strip" id="strip"></div>
+  <section class="kpis" id="kpis"></section>
+
+  <section class="panel">
+    <div class="headrow">
+      <div><h2>Account value</h2><p class="h2sub" id="eqSub">Daily closing value of the paper account.</p></div>
+      <div class="seg" role="group" aria-label="Chart range"><button data-r="daily" aria-pressed="true">Daily, 1 year</button><button data-r="hourly" aria-pressed="false">Hourly, 1 week</button></div>
+    </div>
+    <div id="eqBox"></div>
+  </section>
+
+  <div class="two">
+    <section class="panel">
+      <h2>Road to live trading</h2><p class="h2sub">The bot's own rule: at least 100 closed trades, a win rate whose 95% lower bound is 62% or more, and a positive average result.</p>
+      <div class="meter" id="meter"></div>
+    </section>
+    <section class="panel">
+      <h2>Drop from the peak</h2><p class="h2sub">How far the account is below its best value. The bot pauses new trades at 10%.</p>
+      <div id="ddBox"></div>
+    </section>
+  </div>
+
+  <section class="panel">
+    <h2>Open positions</h2><p class="h2sub">Stocks the bot holds right now, with the broker stop-loss that protects each one.</p>
+    <div id="posBox"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Closed trades</h2><p class="h2sub">Every finished trade. R is the result measured in units of the risk taken: +1R means it made what it risked, −1R means the stop was hit.</p>
+    <div id="tradeBox"></div>
+  </section>
+
+  <div class="two">
+    <section class="panel">
+      <h2>Results by stock</h2><p class="h2sub">Closed trades grouped by stock.</p>
+      <div id="stockBox"></div>
+    </section>
+    <section class="panel">
+      <h2>Trade results in R</h2><p class="h2sub">How many trades ended at each result.</p>
+      <div id="rBox"></div>
+    </section>
+  </div>
+
+  <section class="panel">
+    <h2>What the bot considered</h2><p class="h2sub">Every setup the bot looked at, whether it traded, and why not. "If taken" is the simulated result the bot records for setups it skipped, so you can see what the filters cost or saved.</p>
+    <div id="sigBox"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Broker orders</h2><p class="h2sub">Orders on the Alpaca paper account, newest first.</p>
+    <div id="ordBox"></div>
+  </section>
+
+  <p class="note" id="foot"></p>
+</div>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+const SNAP0 = JSON.parse(document.getElementById('data').textContent);
+let S = SNAP0, LIVE = null, liveNote = '';
+const charts = {};
+let range = 'daily';
+const $ = id => document.getElementById(id);
+const num = v => v == null || v === '' ? null : +v;
+const fmt$ = (v, d = 0) => v == null ? '—' : (v < 0 ? '−$' : '$') + Math.abs(v).toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+const sgn$ = (v, d = 0) => v == null ? '—' : (v > 0 ? '+' : '') + fmt$(v, d);
+const fmtP = (v, d = 1) => v == null || !isFinite(v) ? '—' : (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v * 100).toFixed(d) + '%';
+const fmtR = v => v == null ? '—' : (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(2) + 'R';
+const cls = v => v > 0 ? 'pos' : v < 0 ? 'neg' : '';
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const empty = (title, body) => `<div class="empty"><b>${title}</b>${body}</div>`;
+const arr = x => Array.isArray(x) ? x : [];
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+function renderPage() {
+const A = S.account || {}, B = S.bot || {}, E = S.env || {}, ST = S.state || {};
+const trades = arr(B.trades).slice().sort((a, b) => (a.exit_date > b.exit_date ? 1 : -1));
+const positions = arr(S.positions), botPos = Object.fromEntries(arr(B.positions).map(p => [p.symbol, p]));
+const orders = arr(S.orders), signals = arr(B.signals), shadows = Object.fromEntries(arr(B.shadow_trades).map(s => [s.signal_id, s]));
+const START = 100000;
+
+function history(h) {
+  if (!h || !Array.isArray(h.timestamp)) return [];
+  return h.timestamp.map((t, i) => ({t: new Date(t * 1000), v: h.equity[i]})).filter(x => x.v != null && x.v > 0);
+}
+const daily = history(S.history), hourly = history(S.history_intraday);
+
+// ----- header + status -----
+const gen = new Date(S.generated_at);
+$('stamp').innerHTML = (LIVE ? `<span class="live">● Live</span> updated <b>${new Date(LIVE.at).toLocaleTimeString('en-US', {timeStyle: 'short'})}</b><br>checks again every minute while open` : `Snapshot <b>${gen.toLocaleString('en-US', {dateStyle: 'medium', timeStyle: 'short'})}</b><br>New York time ${gen.toLocaleString('en-US', {timeZone: 'America/New_York', timeStyle: 'short'})}`) + (liveNote ? `<br><span class="lnote">${esc(liveNote)}</span>` : '');
+const flags = ST.flags || {};
+const lastRun = arr(B.runs).slice(-1)[0];
+const tags = [
+  [E.PAPER === 'true' || ST.mode === 'paper' ? 'ok' : 'bad', 'Paper account', ''],
+  [E.DRY_RUN === 'false' ? 'ok' : 'warn', E.DRY_RUN === 'false' ? 'Placing paper orders' : 'Dry run', E.DRY_RUN === 'false' ? '' : ' · plans only, sends no orders'],
+  ['info', 'Strategy', ' · ' + (E.STRATEGY || 'trend_pullback')],
+  [E.PAPER_TRIAL === 'true' ? 'warn' : '', E.PAPER_TRIAL === 'true' ? 'Paper trial on' : 'Paper trial off', E.PAPER_TRIAL === 'true' ? ' · trades before the strategy is approved' : ''],
+  [flags.kill_switch ? 'bad' : 'ok', flags.kill_switch ? 'Kill switch ON' : 'Kill switch off', ''],
+  [flags.paused ? 'bad' : 'ok', flags.paused ? 'Paused' : 'Not paused', ''],
+  ['', 'Sizing', ` · ${E.RISK_PER_TRADE ? (+E.RISK_PER_TRADE * 100).toFixed(2) + '% risk' : '—'}, ${E.MAX_OPEN_POSITIONS || '—'} positions, ${E.MAX_POSITION_PCT ? (+E.MAX_POSITION_PCT * 100).toFixed(0) + '% cap' : '—'}`],
+  lastRun ? [lastRun.status === 'ok' ? '' : 'bad', 'Last bot job', ` · ${lastRun.job} ${lastRun.status}, ${new Date(lastRun.started_at).toLocaleString('en-US', {timeZone: 'America/New_York', dateStyle: 'short', timeStyle: 'short'})} NY`] : null,
+].filter(Boolean);
+$('strip').innerHTML = tags.map(([c, t, s]) => `<span class="tag ${c}">${t}<span>${esc(s)}</span></span>`).join('');
+
+// ----- KPIs -----
+const eq = num(A.equity) ?? num(ST.equity), last = num(A.last_equity), cash = num(A.cash), lmv = num(A.long_market_value) ?? 0;
+const peak = Math.max(eq || 0, num(ST.peak_equity) || 0, ...daily.map(d => d.v));
+const dd = peak ? eq / peak - 1 : 0;
+const realized = trades.reduce((a, t) => a + (+t.pnl || 0), 0);
+const unreal = positions.reduce((a, p) => a + (+p.unrealized_pl || 0), 0);
+const wins = trades.filter(t => +t.pnl > 0).length, n = trades.length;
+const avgR = n ? trades.reduce((a, t) => a + (+t.r_multiple || 0), 0) / n : null;
+const k = [
+  ['Account value', fmt$(eq), `started ${fmt$(START)}`, ''],
+  ['Total profit', sgn$(eq - START), fmtP(eq / START - 1, 2), cls(eq - START)],
+  ['Today', last ? sgn$(eq - last) : '—', last ? fmtP(eq / last - 1, 2) + ' vs yesterday' : '', cls(eq - last)],
+  ['Drop from peak', fmtP(dd, 2), `peak ${fmt$(peak)}`, dd < 0 ? 'neg' : ''],
+  ['Cash', fmt$(cash), eq ? `${((lmv / eq) * 100).toFixed(1)}% invested` : '', ''],
+  ['Open positions', String(positions.length), positions.length ? `unrealized ${sgn$(unreal)}` : 'none right now', cls(unreal)],
+  ['Closed trades', String(n), `${Math.max(0, 100 - n)} more to reach 100`, ''],
+  ['Win rate', n ? (wins / n * 100).toFixed(1) + '%' : '—', n ? `${wins} won, ${n - wins} lost` : 'no closed trades yet', ''],
+  ['Average result', fmtR(avgR), 'per closed trade', cls(avgR)],
+  ['Realized profit', sgn$(realized), 'from closed trades', cls(realized)],
+];
+$('kpis').innerHTML = k.map(([a, b, c, d]) => `<div class="kpi"><div class="k">${a}</div><div class="v ${d}">${b}</div><div class="d">${c}</div></div>`).join('');
+
+// ----- charts -----
+
+function opts(yFmt, xFmt) {
+  const fg = css('--muted');
+  return {responsive: true, maintainAspectRatio: false, animation: false, interaction: {mode: 'index', intersect: false},
+    plugins: {legend: {display: false}, tooltip: {backgroundColor: css('--panel'), titleColor: css('--fg'), bodyColor: css('--fg'), borderColor: css('--line'), borderWidth: 1, padding: 10, bodyFont: {family: css('--mono'), size: 12}, callbacks: {label: c => ' ' + c.dataset.label + ': ' + yFmt(c.parsed.y)}}},
+    scales: {x: {ticks: {color: fg, maxTicksLimit: 7, maxRotation: 0, font: {family: css('--mono'), size: 11}, ...(xFmt ? {callback: xFmt} : {})}, grid: {display: false}, border: {color: css('--line')}},
+      y: {ticks: {color: fg, callback: yFmt, font: {family: css('--mono'), size: 11}}, grid: {color: css('--grid')}, border: {display: false}}}};
+}
+function draw(boxId, key, cfg, cls = 'chartbox') {
+  if (!$(key)) $(boxId).innerHTML = `<div class="${cls}"><canvas id="${key}"></canvas></div>`;
+  if (charts[key]) charts[key].destroy();
+  charts[key] = new Chart($(key), cfg);
+}
+
+function renderCharts() {
+  const pts = range === 'daily' ? daily : hourly;
+  const lab = pts.map(p => range === 'daily' ? p.t.toISOString().slice(0, 10) : p.t.toLocaleString('en-US', {timeZone: 'America/New_York', month: 'short', day: 'numeric', hour: 'numeric'}));
+  if (pts.length < 2) {
+    Object.values(charts).forEach(c => c.destroy()); for (const key in charts) delete charts[key];
+    $('eqBox').innerHTML = empty('Not enough history yet', `The broker has ${pts.length} ${range === 'daily' ? 'daily' : 'hourly'} value${pts.length === 1 ? '' : 's'} for this account. The line appears once the account has two or more.`);
+    $('ddBox').innerHTML = empty('No drop yet', `The account is ${fmtP(dd, 2)} from its peak.`);
+    return;
+  }
+  const yfmt = v => fmt$(v);
+  draw('eqBox', 'eqC', {type: 'line', data: {labels: lab, datasets: [
+    {label: 'Account value', data: pts.map(p => p.v), borderColor: css('--s1'), backgroundColor: css('--s1') + '22', fill: true, borderWidth: 2, pointRadius: 0, pointHoverRadius: 4, tension: 0},
+    {label: 'Starting money', data: pts.map(() => START), borderColor: css('--faint'), borderDash: [4, 4], borderWidth: 1, pointRadius: 0}]}, options: opts(yfmt)});
+  let pk = -Infinity; const ddv = pts.map(p => { pk = Math.max(pk, p.v); return p.v / pk - 1; });
+  draw('ddBox', 'ddC', {type: 'line', data: {labels: lab, datasets: [
+    {label: 'Below peak', data: ddv, borderColor: css('--neg'), backgroundColor: css('--neg') + '33', fill: true, borderWidth: 1.5, pointRadius: 0, tension: 0},
+    {label: 'Pause level', data: ddv.map(() => -0.10), borderColor: css('--warn'), borderDash: [5, 4], borderWidth: 1, pointRadius: 0}]}, options: opts(v => (v * 100).toFixed(1) + '%')}, 'chartbox sm');
+}
+document.querySelectorAll('.seg button').forEach(b => b.onclick = () => {
+  range = b.dataset.r; document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b)); renderCharts();
+});
+
+// ----- road to live -----
+(function meter() {
+  const z = 1.96, wr = n ? wins / n : 0;
+  const lb = n ? (wr + z * z / (2 * n) - z * Math.sqrt(wr * (1 - wr) / n + z * z / (4 * n * n))) / (1 + z * z / n) : 0;
+  const row = (label, val, frac, goalFrac, ok, cap) => `<div class="mrow"><div class="top"><span>${label}</span><b>${val}</b></div>
+    <div class="track"><div class="fill" style="width:${Math.max(0, Math.min(1, frac)) * 100}%"></div>${goalFrac != null ? `<div class="goal" style="left:${goalFrac * 100}%"></div>` : ''}</div>
+    <div class="cap"><span class="${ok ? 'yes' : 'no'}">${ok ? '✓ met' : '○ not yet'}</span> · ${cap}</div></div>`;
+  $('meter').innerHTML =
+    row('Closed trades', `${n} of 100`, n / 100, null, n >= 100, 'needs 100 before any live trading') +
+    row('Win rate, 95% lower bound', n ? `${(lb * 100).toFixed(1)}%` : '—', lb, 0.62, n >= 100 && lb >= 0.62, `marker at 62%; actual win rate ${n ? (wr * 100).toFixed(1) + '%' : '—'}`) +
+    row('Average result per trade', fmtR(avgR), avgR == null ? 0 : 0.5 + Math.max(-0.5, Math.min(0.5, avgR / 2)), 0.5, avgR != null && avgR > 0, 'must be above 0R (marker)');
+})();
+
+// ----- open positions -----
+$('posBox').innerHTML = positions.length ? `<div class="scroll"><table><thead><tr><th>Stock</th><th>Shares</th><th>Bought at</th><th>Now</th><th>Value</th><th>Profit</th><th>Profit %</th><th>Today</th><th>Stop</th><th>R now</th><th>Days held</th></tr></thead><tbody>` +
+  positions.map(p => {
+    const b = botPos[p.symbol] || {}, entry = +p.avg_entry_price, cur = +p.current_price, stop = b.stop ?? null, init = b.initial_stop ?? null;
+    const r = init != null && entry > init ? (cur - entry) / (entry - init) : null;
+    return `<tr><td class="m"><b>${esc(p.symbol)}</b></td><td class="m">${(+p.qty).toLocaleString()}</td><td class="m">${fmt$(entry, 2)}</td><td class="m">${fmt$(cur, 2)}</td><td class="m">${fmt$(+p.market_value)}</td>
+      <td class="m ${cls(+p.unrealized_pl)}">${sgn$(+p.unrealized_pl, 2)}</td><td class="m ${cls(+p.unrealized_plpc)}">${fmtP(+p.unrealized_plpc, 2)}</td><td class="m ${cls(+p.unrealized_intraday_pl)}">${sgn$(+p.unrealized_intraday_pl, 2)}</td>
+      <td class="m">${stop != null ? fmt$(stop, 2) : '—'}</td><td class="m ${cls(r)}">${fmtR(r)}</td><td class="m">${b.days_held ?? '—'}</td></tr>`;
+  }).join('') + '</tbody></table></div>'
+  : empty('No open positions', E.DRY_RUN === 'false' ? 'The bot buys only when a setup passes every rule. New positions show here, with their stop-loss, after the next snapshot.' : 'The bot is in dry-run mode, so it plans trades but does not buy.');
+
+// ----- closed trades -----
+$('tradeBox').innerHTML = n ? `<div class="scroll tbl-wrap"><table><thead><tr><th>Stock</th><th>Bought</th><th>Sold</th><th>Days</th><th>Buy price</th><th>Sell price</th><th>Shares</th><th>Profit</th><th>R</th><th class="l">Why it closed</th></tr></thead><tbody>` +
+  trades.slice().reverse().map(t => `<tr><td class="m"><b>${esc(t.symbol)}</b></td><td class="m">${esc(t.entry_date)}</td><td class="m">${esc(t.exit_date)}</td><td class="m">${t.holding_days ?? '—'}</td>
+    <td class="m">${fmt$(+t.entry_price, 2)}</td><td class="m">${fmt$(+t.exit_price, 2)}</td><td class="m">${t.shares}</td><td class="m ${cls(+t.pnl)}">${sgn$(+t.pnl, 2)}</td><td class="m ${cls(+t.r_multiple)}">${fmtR(+t.r_multiple)}</td><td class="l">${esc(String(t.exit_reason).replace(/_/g, ' '))}</td></tr>`).join('') + '</tbody></table></div>'
+  : empty('No closed trades yet', 'Each trade the bot finishes lands here with its profit and R. The go-live rule needs 100 of them.');
+
+// ----- by stock + R histogram -----
+if (n) {
+  const g = {}; trades.forEach(t => { const x = g[t.symbol] ||= {n: 0, w: 0, pnl: 0, r: 0}; x.n++; x.w += +t.pnl > 0; x.pnl += +t.pnl; x.r += +t.r_multiple; });
+  $('stockBox').innerHTML = `<div class="scroll tbl-wrap"><table><thead><tr><th>Stock</th><th>Trades</th><th>Won</th><th>Profit</th><th>Avg R</th></tr></thead><tbody>` +
+    Object.entries(g).sort((a, b) => b[1].pnl - a[1].pnl).map(([s, x]) => `<tr><td class="m"><b>${esc(s)}</b></td><td class="m">${x.n}</td><td class="m">${(x.w / x.n * 100).toFixed(0)}%</td><td class="m ${cls(x.pnl)}">${sgn$(x.pnl, 2)}</td><td class="m ${cls(x.r)}">${fmtR(x.r / x.n)}</td></tr>`).join('') + '</tbody></table></div>';
+} else $('stockBox').innerHTML = empty('Nothing to group yet', 'Fills in once trades close.');
+
+function renderR() {
+  if (!n) { $('rBox').innerHTML = empty('No results yet', 'A bar chart of trade results appears after the first closed trade.'); return; }
+  const edges = [-1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2], bins = new Array(edges.length + 1).fill(0);
+  trades.forEach(t => { const r = +t.r_multiple; let i = edges.findIndex(e => r < e); if (i < 0) i = edges.length; bins[i]++; });
+  const labels = ['< −1.5R', ...edges.slice(1).map((e, i) => `${edges[i]}…${e}R`), '≥ 2R'];
+  draw('rBox', 'rC', {type: 'bar', data: {labels, datasets: [{label: 'Trades', data: bins, backgroundColor: labels.map((_, i) => i <= 3 ? css('--neg') : css('--pos')), borderRadius: 3, borderSkipped: 'bottom'}]},
+    options: opts(v => Math.round(v))}, 'chartbox sm');
+}
+
+// ----- signals -----
+$('sigBox').innerHTML = signals.length ? `<div class="scroll tbl-wrap"><table><thead><tr><th>Day</th><th class="l">Stock</th><th>Win chance</th><th>Lower bound</th><th>Traded?</th><th class="l">Reason</th><th>If taken</th><th class="l">Outcome</th></tr></thead><tbody>` +
+  signals.slice().reverse().map(s => {
+    const sh = shadows[s.id];
+    return `<tr><td class="m">${esc(s.day)}</td><td class="m l"><b>${esc(s.symbol)}</b></td><td class="m">${s.win_prob != null ? (s.win_prob * 100).toFixed(1) + '%' : '—'}</td><td class="m">${s.lower_bound != null ? (s.lower_bound * 100).toFixed(1) + '%' : '—'}</td>
+      <td class="${s.taken ? 'yes' : 'no'}">${s.taken ? 'Planned' : 'Skipped'}</td><td class="reason">${esc(s.reason)}</td>
+      <td class="m ${sh ? cls(+sh.r_multiple) : ''}">${sh ? fmtR(+sh.r_multiple) : '—'}</td><td class="l">${sh ? esc(String(sh.exit_reason).replace(/_/g, ' ')) + ', ' + esc(sh.exit_date) : '<span class="no">pending</span>'}</td></tr>`;
+  }).join('') + '</tbody></table></div>' + (() => {
+    const sk = arr(B.shadow_trades); if (!sk.length) return '';
+    const tk = sk.filter(x => x.taken), nt = sk.filter(x => !x.taken);
+    const sum = xs => xs.length ? `${xs.length} setups, ${(xs.filter(x => x.win).length / xs.length * 100).toFixed(0)}% would have won, average ${fmtR(xs.reduce((a, x) => a + x.r_multiple, 0) / xs.length)}` : 'none';
+    return `<p class="note" style="margin-top:12px"><b>Planned:</b> ${sum(tk)}. <b>Skipped:</b> ${sum(nt)}. These are simulated outcomes over very few days, so read them as anecdotes, not evidence.</p>`;
+  })()
+  : empty('No setups recorded yet', 'The bot logs every setup it considers each morning.');
+
+// ----- orders -----
+$('ordBox').innerHTML = orders.length ? `<div class="scroll tbl-wrap"><table><thead><tr><th>Submitted</th><th>Stock</th><th>Side</th><th>Type</th><th>Qty</th><th>Limit / stop</th><th>Filled</th><th>Avg fill</th><th class="l">Status</th></tr></thead><tbody>` +
+  orders.map(o => `<tr><td class="m">${esc(String(o.submitted_at || o.created_at).slice(0, 16).replace('T', ' '))}</td><td class="m"><b>${esc(o.symbol)}</b></td><td class="l">${esc(o.side)}</td><td class="l">${esc(String(o.order_class && o.order_class !== 'simple' ? o.order_class + ' ' : '') + o.type)}</td>
+    <td class="m">${esc(o.qty)}</td><td class="m">${o.limit_price ? fmt$(+o.limit_price, 2) : o.stop_price ? fmt$(+o.stop_price, 2) : '—'}</td><td class="m">${esc(o.filled_qty)}</td><td class="m">${o.filled_avg_price ? fmt$(+o.filled_avg_price, 2) : '—'}</td><td class="l">${esc(o.status)}</td></tr>`).join('') + '</tbody></table></div>'
+  : empty('No orders on the paper account yet', 'Orders appear here once the bot sends them.');
+
+// ----- footer -----
+const errs = ['account', 'positions', 'orders', 'fills', 'history'].filter(k => S[k] && !Array.isArray(S[k]) && S[k].error);
+$('foot').innerHTML = `<b>About this page.</b> ${LIVE ? 'Opened in the Claude desktop app on your Mac, it reads your paper account live through a read-only connection on the Mac (<code>data/dashboard/mcp_server.py</code>) and checks again every minute.' : `This copy shows the snapshot taken ${gen.toLocaleString('en-US', {dateStyle: 'medium', timeStyle: 'short'})}. Open it in the Claude desktop app on your Mac to see live numbers.`} To update this snapshot for your phone, ask Claude in this project to "refresh the bot dashboard". Claude reruns a read-only script on your Mac (<code>data/dashboard/snapshot.py</code>) that only reads the paper account and the bot's records, then republishes this page at the same link. The page cannot place or change trades.` +
+  (errs.length ? ` <b>Missing data:</b> the broker didn't return ${errs.join(', ')} in this snapshot.` : '');
+
+renderCharts(); renderR();
+}
+function renderAll() { if (window.Chart) renderPage(); }
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', renderAll);
+new MutationObserver(renderAll).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
+if (window.Chart) renderAll(); else $('eqBox').innerHTML = empty('Charts did not load', 'Reload the page to try again.');
+
+// ----- live mode: read the bot's read-only server on the Mac, when this page is open in the Claude desktop app -----
+(async () => {
+  if (!window.claude || !window.claude.use) return;
+  let mcp = null; try { mcp = await window.claude.use('mcp'); } catch (e) { return; }
+  if (!mcp) return;
+  const GONE = ['server_not_connected', 'not_granted', 'capability_disabled', 'capability_removed', 'not_in_manifest', 'blocked_by_policy', 'approval_required', 'needs_reauth'];
+  mcp.watchTool('host:tradingbot', 'dashboard_snapshot', null, ev => {
+    if (ev.type === 'data') {
+      let p = ev.result && ev.result.payload;
+      if (p && p.result && !p.account) p = p.result;
+      if (!p || !p.account) return;
+      S = p; LIVE = {at: (ev.result.cache && ev.result.cache.storedAt) || Date.parse(p.generated_at) || Date.now()}; liveNote = '';
+      renderAll();
+    } else {
+      const c = ev.error && ev.error.code;
+      if (GONE.includes(c)) {
+        // No live connection here (phone, web, or the Mac server isn't running): show the saved snapshot.
+        S = SNAP0; LIVE = null;
+        liveNote = c === 'not_in_manifest' ? 'Live updates are turned off for this page.' : '';
+      } else {
+        liveNote = LIVE ? 'The last live check failed; showing the previous numbers.' : '';
+      }
+      renderAll();
+    }
+  }, {refetchInterval: 60000});
+})();
+</script>
